@@ -1,0 +1,10 @@
+---
+title: Workaround for Geany comment toggling in Haskell source files
+published: 2016-07-05
+created: 2016-07-05
+status: finished
+---
+The [[https://en.wikipedia.org/wiki/Geany][Geany]] shortcut =Ctrl e= to toggle single line comments is useful. For some reason the inserted comment characters for Haskell, =.hs=, files include a trailing tilde, producing ~--~~. Unfortunately the compiler (GHC) does not seem to like the =~= character following the comment characters.
+
+A workaround is to edit =filetypes.haskell= located in =/usr/share/geany/=. I found adding a single space at the end of the line ~comment_single=--~ did the trick. Now =Ctrl e= inserts ~-- ~~. The compiler is happy and comment toggling works.
+# It appears that Geany relies on the =~= character to determine whether it has set a comment.

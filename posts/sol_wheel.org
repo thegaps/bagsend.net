@@ -1,0 +1,72 @@
+---
+title: Celestial (Workshop) Mechanics
+created: 2016-05-23
+published: 2016-06-21
+modified: 2016-08-16
+status: in progress
+---
+
+Another post where I neglect the bulk of physics to imagine nonsense.
+
+/What if the Earth was an Earth sized cog which moves on an orbit sized gear, and the planet's present rate of rotation determines how quickly we move through this orbit?/
+
+We are essentially trading orbital mechanics as mediated by gravity, for
+a mechanics more commonly found in everyday experience.
+
+*** Facts
+
+-  Radius of Earth, $R = 6378.1km$ (equatorial)
+-  Average orbital speed, $v_o = 29.78km/s$
+-  Orbital period, $365.26days$
+-  Rotation, $w = 7.292115\times10{-5}rad/s$ (inertial frame)
+
+*** Simple analysis
+
+We can determine the linear velocity at the equator, which is where our
+world would connect with the giant cog (on average).
+
+#+BEGIN_QUOTE
+  $$v_l = 6378.1 \times 7.292115\times10{-5}$$
+#+END_QUOTE
+#+BEGIN_QUOTE
+  $$v_l = 0.4651km/s$$
+#+END_QUOTE
+
+We can compare this to the current orbital speed:
+
+#+BEGIN_QUOTE
+  $29.78/0.4651 = 64.0yrs$
+#+END_QUOTE
+
+Thus, it would take *64 years* to creak once around the sun in our
+substitute cog-based orbit.
+
+We can compare this to the current orbital speed to find the new length
+of one orbit (solar year)[1]:
+
+$29.78/0.4651 \times 365.26 = 23,387 days$
+
+** Randamifications
+/(Random unfounded ramifications)/
+
+This makes it unlikely anybody would be alive for more than one complete
+orbit in one lifetime.
+
+One obvious effect is that the seasons would be longer in duration. Maybe it would seem even more natural (this comparison is already done often) to compare the passing seasons to
+the stages in ones life. Generational labelling (Baby Boomers,
+Millenials etc.) periods will change to sync up with the 16 year
+seasonal periods, so you will have 'Spring', 'Summer', 'Autumn', and
+'Winter' generations.
+# The seasons would be relevantly/applicably/similarly/likewise extended. It is obvious countless species could not live as they do now, in such a world.
+
+*** Further questions
+
+-  Is this mechanically possible?
+   -  Could a gigantic cog interface handle the required centripetal
+      force to maintain orbit?
+   -  Could the orbit sized gear be maintained?
+      -  Pretty much a Ringworld, with a bit of extra loading which is
+         uneven.
+
+[1] We ignored the effect of the slightly decreased orbital distance
+used here, as the radius of the Earth was not accounted for. A small omission in the scheme of things.

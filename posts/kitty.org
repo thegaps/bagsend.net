@@ -1,0 +1,60 @@
+---
+title: Keyboards and Kitties (stub)
+created: 2016-07-04
+published: 2016-07-04
+status: abandoned
+---
+
+# *** Trouble-makers
+My friend recently related to me the mischief their little kitten causes. A mad dash across the keyboard can close a playing movie, move a file, or open programs at random. I think this is pretty funny. This is an ancient problem, with well-established solutions. The easiest to implement are 'kitty-traps', which can be as simple as a cardboard box near your computer.
+
+There are also software solutions, which try to detect cat-like key-presses. For Windows there is the commercial [[http://www.bitboost.com/pawsense/][Pawsense]], and for Mac there is [[https://people.math.osu.edu/fowler.291/software/cat-nip/][Catnip]]. A boring alternative for Windows and Mac is [[http://catslock.co.nz][Catslock]], which simply provides a key to disable the keyboard. I could not find anything for Linux. In any case, I do not have quite the same motivation as the people who find this a problem.
+
+In fact, my motivation is mischievous.
+
+** Making trouble
+I think it is great that a silly fluff-ball can disrupt whatever you are doing[1], and in general, add some noise to a normally very proper, ordered, and sensible human-computer interaction[2]. I see a shortcoming though. The effects of a keyboarding cat are generally random; one time the kitty might close a window, another time it might ruin your last paragraph.  
+Wouldn't it be more entertaining if the cat caused the /same/ effect each time? How much better would it be if the chance of such an effect was also particularly remote?
+
+Yes, and much better.
+
+I recall being young[3]. We learned to do quick key-press chains to disrupt our friends computers (or the shared class computer). Ctrl + Alt + arrow was a favoured combination; rotating the screen any which way. For the uninitiated victims this meant navigating awkwardly to display settings to fix it. Prime entertainment.
+
+I propose that a software is created that detects cat-like keyboard activity, and then instead of helping the hapless owner by locking the keyboard, rotates the screen. Bonus points for sneaking it onto a friends computer then waiting for stories of their infuriatingly and ridiculously coordinated cat.
+
+Unfortunately, the basic technology used for this is a key-logger. A key-logger is something I would not put on somebodies computer without their permission, even if it was designed /not/ to keep any permanent logs. It seems like an undue security risk to give a joke program the privilege to access all keyboard input.
+
+
+** Making a program I can never use
+*** Determining keyboard activity 
+[[https://github.com/kernc/logkeys/][Logkeys]] is a Linux utility. Unsurprisingly, it is a key-logger.
+
+Being kind-of/incompetently/sometimes security concious, I want to be somewhat sure I won't accidentally share key-logs. I trust Logkeys because the source is available, and it appears high-ranking in web searches. The program does have an inbuilt upload feature, which I don't trust myself to not accidentally use. To fulfill my desire for some 'cheap' peace of mind I looked for ways to ensure a program does not access the network. I found the neat ~unshare~ program can be used to deny a program network access. Using:
+
+#+BEGIN_SRC bash
+unshare -n program
+#+END_SRC
+
+allows us to run ~program~, while denying it network access.
+
+The first problem I encountered with Logkeys is setting up a keyboard layout. How to do this is documented in the project [[https://github.com/kernc/logkeys/blob/master/README.md][read-me]], or the programs man page.
+
+*** Using the logs
+Possible paths ahead are modifying the Logkeys source to include additional processing of the key-presses. Alternatively, a program might be written to watch the log file for changes. I am not so sure about the latter because the logs are necessarily serial, and do not appear to indicate simultaneous key-presses - information which might be useful for kitty detection. Perhaps there is another interface to Logkeys that is more useful? I do not know.
+
+This is where the task stopped being easy, and I gave up.
+
+** Giving it up
+Understandably[4], I am not motivated to write software that has so little utility.
+
+Other ideas for responses to cat-like key-presses:
+- Use the key-presses as a source of entropy. I have no knowledge in this area so I can only suspect that this is not safe. Possibly related: I found clobbering the keyboard in the hopes of generating enough entropy for a PGP key was futile. There would be fewer key-presses from a cat.
+- Trigger a randomly generated screen-saver and use the key-presses as a influencing factor (Ala music visualisations).
+- Connect to an 'Omeagle for cats'[5]. If a cat is on the keyboard then it can be connected via video-link to other cats on keyboards[6].
+
+[1] Said as someone who does not own a cat.
+[2] Shall we say /British/ human-computer interaction? 
+[3] Maybe.
+[4] Surprisingly.
+[5] Rather: "Catroulette". Unfortunately the domain catroulette.com (NSFW) is taken. 
+[6] Though having your web-cam turn on randomly, and start streaming to a random computer online sounds more than a little dubious. Why must all the fun ideas be security risks?

@@ -1,0 +1,40 @@
+---
+title: An entertaining problem
+published: 2016-07-15
+status: finished
+modified: 2016-07-15
+---
+
+Recently, I was trying to type a capital "Q"[1]. Instead of "Q" I kept getting a "T".
+
+Oh no!
+
+It seemed I had lost the proud letter which is the very beginning of the name of my keyboard layout. You can't have "QWERTY" without "Q".
+
+Thankfully, I recalled I was messing with my [[https://en.wikipedia.org/wiki/X_keyboard_extension][XKB]] keyboard config while trying to get a [[./footpedal.html][USB Foot Switch]] working. At one point I was testing to see if my changes to =/usr/share/X11/xkb/us= were having an effect (they were). So I popped that file open again and saw:
+
+
+#+BEGIN_SRC
+    key <AE11> {	[     minus,	underscore	]	};
+    key <AE12> {	[     equal,	plus		]	};
+
+    key <AD01> {	[	  q,	T		]	}; // Oh dear!
+    key <AD02> {	[	  w,	W		]	};
+    key <AD03> {	[	  e,	E		]	};
+    key <AD04> {	[	  r,	R		]	};
+
+#+END_SRC
+
+I hadn't reverted my test changes. Also, apparently I don't use "Q" often, because it took a week or so for me to realise that it still had an incorrect mapping.
+
+Well, the fix is easy enough, just change that "T" to a "Q"...
+
+Shoot!
+
+I can't type a "Q" to fix not being able to type a "Q". A lovely sense of being in a silly trap flushed over me. Cool!
+
+After basking in the ~Great Silly~, my fix was to copy and paste the blessed, momentarily unreachable, character from the [[https://en.wikipedia.org/wiki/Queen_(band)][Queen Wikipedia page]]. Thanks Queen.
+
+I'm adding this to my new list - "Small things going wrong in Ubuntu which are more entertaining than stressful."
+
+[1] You'll just have to take my word for it.

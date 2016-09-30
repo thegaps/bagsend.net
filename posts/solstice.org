@@ -1,0 +1,141 @@
+---
+title: What's your take on the Solstice?
+created: 2016-06-19
+published: 2016-06-20
+status: in progress
+---
+Or, better yet:\\
+What is your /angle/?
+
+I live on a 2D plane[1]. In my world of everyday concerns the sun moves
+overhead as an accessory to the sky, not as the mammoth object which the
+planet underneath my feet is clung to.
+
+# This is all a fair approximation for a species which is 10\^10 times smaller than the orb on which it resides. !}\\
+I have a recurring curiosity with trying to break out of this world and really visualise the orientation of the earth, my country, and my
+hometown with respect to the solar system. What better time to try visualise this than while at a noteworthy point in our orbit? We will
+soon be at the June solstice, to occur June 20 22:34 UT.\\
+
+# That is June 21 10:24 NZ local time. 
+
+Will anyone be aligned with the sun when the solstice occurs? i.e, will
+anybody experience the sun directly overhead during the solstice?
+
+If this happens then that person will be aligned along a line from the
+centre of the Earth to the centre of the Sun, at the only moment that
+can occur at their latitude once per year. Worth putting on the CV for a
+sales job.
+
+* Pottering about
+
+The solstice marks the point where the axis about which the Earth is
+tilted about with respect to the axis of rotation is parallel to the
+tangent of the orbit of the Earth. The equinoxes occur when this axis
+about which the Earth is tilted is perpendicular to the tangent of the
+orbit.
+
+So, for those in the southern hemisphere, the June Solstice marks the
+height of winter. From that point onward the sun will be getting higher
+in the sky until the December Solstice.
+
+As the Solstice marks the maximum position of the tilt, we will use the
+value of the Earths tilt, 23.44 degrees, to help work out who might be
+aligned during the solstice. So, who are our candidates at a latitude
+23.44 degrees south of the equator? It turns out this latitude has a
+special name, The Tropic of Capricorn[2]. So who lives there?
+
+** Finalists
+
+In order heading east:
+
+-  Namibia
+-  Botswana
+-  South Africa
+-  Mozambique
+-  Madagascar
+-  Australia
+-  Chile
+-  Argentina
+-  Paraguay
+-  Brazil
+
+Ok, are any places here experiencing mid day at June 20 22:34 UT?
+
+The simple way to look this up is to remind ourselves of the definition
+of longitude[3].
+
+*** Longitude
+
+Longitude is the angle from the Prime Meridian, which is an imaginary[4]
+line between the two poles and passes through the Royal Observatory in
+Greenwich, England. UT is the modern version of GMT. Thus the time in
+Greenwich is the current UT without a constant offset accounting for
+longitude. If the solstice was expected to occur at 12:00 (noon), then
+the countries experiencing midday during the solstice would include
+England (Greenwich).
+
+Our event of interest is at 23:24 UT. Who is experiencing 12:00 noon
+local time at 23:44 UT? Somebody who is UT-11.44. This in turn
+corresponds to
+
+11.44 * 360/24 = 171.6 degrees /west/ of Greenwich.
+
+** And the winner is ...
+
+Nobody.
+
+Using a handy tool at
+[[http://itouchmap.com/latlong.html][itouchmap.com]] we can reverse
+look-up coordinates. We can see that there is only a nice patch of the
+South Pacific Ocean at this location. Tonga gets special mention as the
+closest country, at a distance of about 430km.
+
+** Boiling the (South Pacific) Ocean
+
+Just because there isn't populated land at this location does not mean
+there won't be humans there. There could be some sailors perhaps?
+
+However, I don't know how, or care to, look up shipping activity near
+this region, but there are plenty of flight path visualisers which give
+an indication of the paths taken.
+
+It seems some flights between Australia or New Zealand to the Cook
+Islands, or to Los Angeles are contenders for flights going nearer the
+special region than anybody in Tonga. In particular, some of the direct
+flights between Rarotonga (Cook Islands) and Auckland (New Zealand)
+appear to fly nearest to the region, but they tend to be scheduled so
+that the flights occur during the night. 
+# https://www.flightradar24.com/data/flights/nz5#a0206f9 Some of the direct flights between Rarotonga (Cook Islands) and Auckland airport appear to fly over the regions closest. We can easily get data on flights. Unfortunately, people on flights tend to sit down for the duration.
+
+Otherwise we could consider people on the /other/ side of the World.
+Here we find that the people of Algeria have a chance to gain the honour
+of having their feet pointing directly at the sun, on a line passing
+through the centre of the Earth. Though it will be midnight for them.
+# he only have to stand in a seemingly un-populated region, and stand at midnight.
+
+Perhaps we are better off concluding that those in Tonga merely have to
+tilt themselves 4 degrees to be aligned with the sun, and accept that I
+probably didn't work this out properly anyway and it is close enough.
+
+** Further consideration: The damned
+
+Another interesting class of people are those who win the dubious prize
+of being furthest from Sol in our present orbit.
+
+Note that the farthest extreme point of Earths orbit (the aphelion) does
+not always occur simultaneously with the Solstice, it usually doesn't.
+
+To determine who this would be for sure we would have to consider the
+effects of the above, as well as the effect of the orbital eccentricity.
+I suspect the latter will dominate by far.
+
+[1] I wanted to use "we" not "I", but I can't rule out that your life
+isn't fantastic in some way.
+[2] I always thought the Tropic of Capricorn (and the other one)
+referred to some incomprehensible, arcane, celestial knowledge that
+would never fit in with anything else I know, and would only be a cost
+to learn. Turns out they are simple, sensible definitions!
+[3] E.g. I don't know it yet.
+[4] I suspect some brief sections of this line are not imaginary.
+Tourists need to know they are somewhere special, and a lick of paint on
+the ground in Greenwich seems like a cheap attraction.

@@ -1,0 +1,40 @@
+---
+title: About this site
+published: 2016-05-17
+status: ongoing
+---
+** Purpose
+
+I iterated over a couple of longish drafts for this page. After
+reviewing these drafts I realised I could say it better with the
+following essential summary:
+
+*This website is my playground and vanity page.*
+
+I anticipate this website will contain both long (gradually expanded and
+refined) and short (one-off cruft) content.
+
+Let's see what happens.
+
+** Technical
+
+This website is generated using Hakyll, and is all very boring which
+means no Javascript is used. Though in future I might try out something
+like [[https://piwik.org/][Piwik]] for some delicious stats.
+
+My present process for updating and generating the website is
+cumbersome. However I expect this to change, so it is not worth
+documenting at present.
+
+** Licence
+
+Unless otherwise noted in the specific resource (webpage, image etc.),
+all content of this website is released under the
+[[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons
+Attribution-ShareAlike 4.0 International License]]. This excludes images and content shared from other sources, which will (hopefully) be noted as appropriate.
+# That's right, I can't even give this away!
+Code hosted on Github is under the licence in its repository. 
+
+Finally, while I may strive for accuracy in the minority of posts, I
+disclaim that anything I say bears anything more than a passing
+resemblance to reality.

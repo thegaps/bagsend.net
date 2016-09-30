@@ -1,0 +1,22 @@
+<!--
+<ul>
+    $for(posts)$
+        <li>
+			$if(modified)$
+				<a href="$url$">$title$</a> - $date$ ($modified$)
+			$else$
+			<a href="$url$">$title$</a> - $date$
+			$endif$
+        </li>
+    $endfor$
+</ul>
+-->
+
+
+<ul>
+    $for(posts)$
+        <li>
+			<a href="$url$">$title$</a> - $date$
+        </li>
+    $endfor$
+</ul>

@@ -1,0 +1,72 @@
+---
+title: USB Foot Switch
+published: 2016-07-06
+created: 2016-07-06
+modified: 2016-09-21
+status: in progress
+---
+# ordered 14/06/2016
+# received 29/06/2016
+It is impossible to research whether Emacs is a program that meets your needs without coming across comments describing it as un-ergonomic ("emacs pinky!") . Once I had committed to learn at least the basics of Emacs, I sought to pre-empt any significant impacts it might have on my health[1].
+
+The first impression I had was that if the supposed increased strain comes from anywhere - it is from use of the modifier keys - Ctrl & Alt. Commonly recommended 'fixes' are:
+- Software
+  - Change keymappings
+    - E.g. Swap Ctrl and Cpslck
+- Hardware - Use different input devices
+  - Get a fancier keyboard
+    - E.g. split keyboards, maybe even a different layout.
+  - Use narration
+  - Get a foot pedals
+
+Changing keymappings is free, but I was tempted to try something a bit more dramatic. Buying a new 'ergonomic' keyboard looks expensive, and is something I would want to do more research on before purchase.
+
+Narration is interesting, but it would be embarrasing to speak all the crap I write out loud[2]. Narration remains an interesting option though; I can imagine that using narration for writing might have effects on general converstaion ability, as you have more practice sounding out ideas verbally.
+
+A foot pedal is something I have never used or even seen being used before[3]. This novelty, and low cost made this my choice[4]. The added excitment of getting some new hardware settled the matter. 
+
+So I bought a cheap three pedal [[http://www.pcsensor.com/usb-foot-control-keyboard-mouse-button-three-switch-pedal-fs3_p-p180.html][PCsensor]] foot switch. This particular product has some limitations, but the idea was to try this out first to get a feel for the territory.
+
+** Foot pedal
+*** Limitations
+ Software support for the pedal is limited to Windows. I presume there are workarounds for Linux, but I did not find them before I found this [[https://linuxmusicians.com/viewtopic.php?t=7953][thread]] which pointed out the settings are persistent, so one merely has to have Windows handy to change the settings once.
+
+ Only one pedal can register a pedal-press at once. So there no use mapping Ctrl & Shft to the pedals in the hopes of using Ctrl + Shft combos.
+
+*** Configuration
+As previously mentioned, I was looking to reduce the number of times I would type modifier keys, like Ctrl and Alt. This made them the natural choice for mapping to the pedals.
+
+I also saw a suggestion in a Reddit thread for mapping PageDown to one of the pedals. This allows for any amount of slouching while browsing documents and webpages - it really puts the 'surf' back in 'surfing the web'.
+
+So the first mapping I tried was from left to right:
+
+Ctrl PageDown Alt
+
+And this is what I have stuck with so far.
+
+*** Experience
+
+# Bought [2016-06-29 Wed 16:35]
+- 2016/06/29 In the couple of days since installing the pedal I felt clumsy and slow while operating it.
+
+- 2016/07/01 I try changing the configuration - Nope, I'm too used to it already.
+
+# couple of days tried changing - nope
+
+# [2016-07-06 Wed 16:35]
+- 2016/07/06 Feel a little sore in knees.
+
+#  [2016-07-11 Mon 09:13] Just pressing the Alt key alone brings up a command prompt.
+- 2016/07/11 When listening to rocking tunes I start foot-tapping. This is made more fun because I have these pedals. This means the command bar keeps flashing at me.
+
+#  [2016-07-30 Sat 23:48]
+- 2016/07/30 Addicted to tapping. I now Alt-Tab for no reason at all. This is the new paper shuffling. People with multiple desktops will appreciate this.
+
+#  [2016-09-15 Thu 06:11] last week or two.
+- 2016/09/15 Started getting cramps in calves. Cramp follows stretching out feet in a similar motion to using the pedals.
+#  Started taking Magnesium supplements as the common fix. I could turn this into a loose experiment.
+
+[1] After a little searching this topic all I found was anecdotal evidence, so this whole topic is on uncertain grounds and I cannot make any sure recommendations.
+[2] Yes, this included. I imagine the effect would be similar to [[https://xkcd.com/481/][XKCD 481]].
+[3] Presumably because they are kept away from the public eye. For instance, I'm not sure I could face taking one to work unless having one was a really /big/ boon.
+[4] Admittedly a higher cost than just changing keymappings... but toys!

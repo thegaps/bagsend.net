@@ -1,0 +1,227 @@
+---
+title: Simple activity logging
+created: 2016-06-22
+published: 2016-06-22
+modified: 2016-07-27
+status: finished
+---
+
+This could hardly be a blog without a post on productivity[1].
+
+I am one of the many who dream about 'the ultimate organisational tool'.
+For me this dream typically includes personal stats, time spent working
+on various tasks, data on attention spans, exercise schedule, and the
+like. Tangled up with this dream is the tendency to prematurely optimise
+anything.
+
+The argument; "This (coding project) depends on that (coding work-flow),
+so, if I work on /that/ then I'll be able to work on /this/ better, and
+also work on /some-other-thing/ better too. Therefore working on /that/
+is more important. Rinse and repeat this argument, and you might reach;
+
+If I knew how I worked, then I could work better[2].
+
+I am currently in between organisational systems, so I have not made any
+great progress towards this dream. But, I made a little progress by
+throwing together a simple answer to the following question:
+
+** What did I do today?
+
+Much of my time is spent on the same computer, so I can answer this to a
+decent extend by asking "what did I do on my computer today?".
+
+A simple way to do this is to capture what is on-screen periodically. +I also determined to capture the web-cam at the same time as well, to see
+if anything interesting popped up.+
+
+Edit for honesty: Actually, anything that suggests this was carefully
+considered is a lie. My notes, verbatim, from the time it was first
+written:
+
+#+BEGIN_QUOTE
+Ended up on the subject of periodically capturing webcam and screen images.
+No idea how I ended up chasing this. Anyway, it's all set up now.
+#+END_QUOTE
+
+
+I suspect it was a case of being bored with my tools.
+
+-------
+
+* Solution
+I wrote a short Bash script to take a screen and webcam capture. This script was scheduled with cron. In the first instance, the script was run /every/ minute the computer was on, and took both screen and webcam captures each time it was run.
+
+After a few days use it became apparent that it was not ideal to have the webcam taking pictures at all times (it might capture yourself getting changed). Thankfully this can be addressed by modifying the scheduling of the script. As it was only the webcam capture I wanted to disable at certain times, a command line argument to select what should be captured was added to the script.
+** Script
+
+I used the simplest utilities I could find that worked. These utilities were =import= from
+ImageMagick for the screen capture, and =streamer= for the webcam
+capture.
+ The script as currently used is as follows:
+
+#+BEGIN_SRC bash :tangle ~/bin/webcam_screen_capture.sh
+  #!/bin/bash
+
+  # Log a picture of the screen
+  function screencap {
+      # needed for import to work:
+      export DISPLAY=:0.0
+
+      # rough quality guide for 3Mpx: 20 = 130kB, 40 = 180kB, 70 = 250kB
+      import -window root -quality 20 $FULL_PATH-screen.jpg
+  }
+
+  # Log a picture from the webcam
+  function webcap {
+      # webcam script
+      streamer -f 'jpeg' -c '/dev/video0' -o $FULL_PATH-webcam -s '1280x720'
+      mv $FULL_PATH-webcam $FULL_PATH-webcam.jpg
+  }
+
+  FILE_LOC=~/Pictures/Logs/$(date +%Y/%m/%d/)
+  mkdir -p $FILE_LOC # make directory if it does not already exist
+
+  FILE_NAME=$(date +%T)
+  FULL_PATH=$FILE_LOC$FILE_NAME
+
+  # Handle argument
+  key="$1" # get first argument
+  case $key in
+      -b)
+      echo "You selected both"
+      webcap
+      screencap
+      ;;
+      -w)
+      echo "You selected webcam"
+      webcap
+      ;;
+      -s)
+      echo "You selected screen"
+      screencap
+      ;;
+      ,*)
+      # default, do nothing
+      ;;
+  esac
+#+END_SRC
+
+I saved the above as =~/bin/webcam_screen_capture.sh= and made sure it
+had =+x= permissions. This script saves a time-stamped screen-cap and a
+webcam photo to the save location. The webcam capture is done in two
+parts, image capture, then a rename operation. This is because I could not
+get =streamer= to save the image with the =.jpg= extension directly. A delay can be used with =streamer= using an argument like =-w 1= if required to capture a good frame with your webcam.
+
+Note that if you want to use =webcam_screen_capture.sh= in a terminal
+you will have to make sure =~/bin= is on your =$PATH=.
+
+*** Cron job
+
+I scheduled this task to run once a minute using cron. For higher
+frequency running I suggest you see
+[[http://stackoverflow.com/questions/9619362/running-a-cron-every-30-seconds][this
+SO thread]].
+
+Edit the cron task list with =crontab -e=\\
+For capturing all the time I simply used:
+
+#+BEGIN_EXAMPLE
+* * * * * ~/bin/webcam_screen_capture.sh -b
+#+END_EXAMPLE
+
+Or, for only capturing webcam images during 9-5, Mon-Fri, (screen captures all the time) I used:
+
+#+begin_example
+# Webcam and ScreenCap Logging
+
+# Times to capture webcam and screen
+* 9-16 * * 1-5 ~/bin/webcam_screen_capture.sh -b
+
+# Times to capture screen only
+* 0-8 * * * ~/bin/webcam_screen_capture.sh -s
+* 17-23 * * * ~/bin/webcam_screen_capture.sh -s
+* 9-16 * * 6-7 ~/bin/webcam_screen_capture.sh -s
+#+end_example
+
+As this is my only cron job, I can toggle the logging on and off by using:
+
+#+BEGIN_EXAMPLE
+$/etc/init.d/cron start
+#+END_EXAMPLE
+
+and
+
+#+BEGIN_EXAMPLE
+$/etc/init.d/cron stop
+#+END_EXAMPLE
+
+Otherwise, the lines in crontab will need to be removed or commented out to stop logging.
+*** Success
+  Voila! With a bit of luck images will start appearing in a directory tree inside your
+  =~/Pictures/Logs= folder:
+
+  #+BEGIN_EXAMPLE
+  ~/Pictures/Logs/2016/07/11$ ls
+      08:58:01-screen.jpg
+      08:59:01-screen.jpg
+      09:00:01-screen.jpg
+      09:00:01-webcam
+      09:01:01-screen.jpg
+      09:01:01-webcam
+      09:02:01-screen.jpg
+      09:02:01-webcam
+  #+END_EXAMPLE
+
+  As you might guess, I am mostly new to Bash scripting and =cron=. I
+  ended up getting the =cron= part of this working first. Doing so, I
+  stumbled on an exciting way to hack about - try to write an unfinished
+  script that is run every minute. I ended up displaying seconds in the
+  notifications area clock so I could see when the minute was about to
+  roll over - I would have to save it quickly and then watch as the new attempt failed or succeeded.
+
+  # I then had a half-working script being executed every minute. I went through several cycles of checking StackOverflow answers then hacking a little bit, before the minutes ticked over.
+
+* Results and problems
+
+Problems:
+-  Inadvertent recording
+   -  of other people
+   -  of yourself getting changed (attempted schedule-based fix)
+   -  security issues, depending on what you do?
+
+-  Only good for manual review
+   -  data not immediately useful for further analysis
+   -  no automatic stats generation
+
+-  Disk usage
+   -  currently using ~100MB per day.
+
+# The first time I looked at my first couple of scheduled captures I was horrified. The webcam seemed to have caught me looking cross-eyed. I almost resolved to stay away from computers. Thankfully I have not seen this again in the logs.
+The first days' activity produced a log that upon replaying, was
+surprising and embarrassing. I considered myself savvier than usual with
+my browsing habits. This includes not following 'low quality' links,
+seemingly designed for click generation. I watched my first full-day log
+and saw how I obligingly clicked prominent link after prominent link as
+my day dribbled away. After seeing this evidence, I could not deny that
+I was wasting more time than I thought. It was a strong motive for
+change!
+
+Although I don't suppose I will review the logs often, and it won't lead
+to any great leaps in productivity or insight (past what has happened),
+it does look to be a solid backstop. It might help prevent regrettable
+days spent chasing various subjects idly. Additionally, it can be simply
+funny to watch the expressions you make as you work (anyone for
+office-work reaction gifs?). At a /stretch/ I imagine it could help you
+determine the cause of problems created by a bad working posture - a
+Computer Vision project maybe?
+
+For the time invested, I consider this a success.
+
+** Perspective one month later:
+I have barely looked at the logs. The exception to this is to delete a screencap or two that might have captured a temporarily visible password. However, knowing that this capture log is operating is still a time-wasting detterent. This is mostly noted when browsing the internet[3]. I almost get the feeling that future-me is watching what I do, and am looking disapprovingly over present-me's shoulder. This seems to work even though I know that it is very unlikely I will actually look at the logs.
+
+[1] This is not hypocritical, I consider blogging to be relatively productive (for
+now at least).
+[2] Along with the unquestioned assumption that the highest interest rates
+known to man apply to time invested in productivity gains. 
+[3] Though that is probably because that is the primary way I waste time on my computer. 
+# * when I run =streamer= from the shell it copies text into the terminal input. Doesn't seem to be a problem, not sure what is happening though.

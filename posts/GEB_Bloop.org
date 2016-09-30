@@ -1,0 +1,371 @@
+---
+title: It went BlooP in the night
+created: 2016-05-17
+published: 2016-05-17
+modified: 2016-07-11
+status: in progress
+---
+It has taken me 16 months of on-and-off reading, re-reading, and
+numerous failures of understanding to reach Chapter XIII, 'BlooP and
+FlooP and GlooP' of the tome
+[[https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach][Godel Escher
+Bach]]. I intend to deny myself the joy of moving on in the book until I
+have given the suggested exercises an honest attempt.
+
+These suggested exercises will hopefully teach me something of the power
+of different computer languages. As an overview the different languages
+described in the text are:
+
+-  BlooP. Bounded loops only. AKA predictably finite.
+-  FlooP. Unpredictable or finite loops allowed.
+-  GlooP. A mystery to be revealed. Early guess: 'G' stands for 'Godel'.
+
+The [[https://github.com/thegaps/GEB][Github repo]] contains my attempts
+at realising different functions in any of the above languages. Python
+was used for easy-going coding.
+
+** Principles.
+
+In keeping with the spirit of the task the fundamental operations that
+are explicity allowed in the python code are:
+
+-  addition
+-  multiplication
+-  for and while loops
+-  if statements
+-  equality operators
+
+** Bloop
+
+# *** Subtraction
+Here is one Bloop example:
+
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+  def MINUS(M,N):
+      """return the result of subtracting N from M"""
+      ans = 0
+      if M < N:
+          return ans
+      else:
+          for x in range(M+1):
+              if ans+N == M:
+                  return ans
+              else:
+                  ans +=1
+      print 'MINUS error!'
+      return -1
+#+END_SRC
+
+# In fact I am also using the function range() in the above. Making this function is not one of the exercises, but might be implemented as: ```python def RANGE(N): """returns the list [0:N-1]""" list = [] for x in N:
+
+#+BEGIN_COMMENT
+*** Division
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+# integer division of M by N
+
+#~ keep adding to number of times to multiply N by x until we 
+#~ find situation where N*x = M or (N*x < M and N*(x+1) > M)
+#~ The problem with this approach is how do we put a bound on it?
+#   well, if N is greater than 0, then we should only let x get
+#       as big as M
+
+def DIVISION(M, N):
+    # Easy cases:
+    if N == 0:
+    return 0    # 0? 1? undefined? Meatballs for dinner? (the winner was 0)
+    elif M < N:
+    return 0
+    elif M==N:
+    return 1
+    else:
+    # M > N
+    x = 1
+    for i in range(M):
+        product = x * N
+        if product == M:
+            return x
+        elif (product < M) and ((product+N) > M):
+            return x
+        x += 1
+    return -1
+#+END_SRC
+
+*** Remainder
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+# remainder of M divided by N
+# if N is larger than M, return M
+
+from division import DIVISION
+
+def REMAINDER_MAGIC(M, N):
+    # using magic operator found on-the-line:
+    return M - (M // N * N)
+    # // returns quotient without remainder.
+    # not sure if that is fair play.
+    # additionally the behaviour is different for different py versions 
+    # '-' also not allowed
+    
+def REMAINDER(M, N):
+    # my naive implementation
+    # is checking if a number is an integer allowed?
+    # what kind of process is that check?
+    # => I will work 'backwards' and multiply instead.
+    # DONE/FIXED! implemented divison first, so I can call that here.
+        
+    #Silly cases:
+    if M < N:
+        return M
+    elif M==N:
+        return 0
+    # legit case:
+    else:
+        # M > N
+        rem = 0
+        return M-(N*DIVISION(M,N))
+    print 'REMAINDER error'
+    return -1
+#+END_SRC
+
+*** Factors
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+# returns a list of all the factors of a number, N.
+# in ascending order.
+# each factor is returned only once.
+# N is not included in the list of factors.
+
+from minus import MINUS
+from remainder import REMAINDER
+
+
+def FACTORS(N):
+    factors = []
+    for i in range(1,N):
+        if REMAINDER(N,i) == 0:
+            factors.append(i)
+    return factors
+#+END_SRC
+
+*** Factorial
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+def FACTORIAL(N):
+    if N == 0:
+        return 0
+    ans = 1
+    factor = 1
+    for i in range(N):
+        ans *= factor
+        factor += 1
+    print ans
+    return ans
+#+END_SRC
+
+*** Fibonacci
+
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+# Is memory allowed?
+#   what is memory?
+from minus import MINUS
+
+def FIBO(N):
+    if N == 0:
+        return 0
+    new_result = 1
+    prior_result = 1
+    two_prior_result = 0
+    for i in range(MINUS(N,1)):
+        new_result = prior_result + two_prior_result
+        two_prior_result = prior_result
+        prior_result = new_result
+    return new_result
+#+END_SRC
+
+*** Perfect 
+
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+#~ Determines if N is a perfect number.
+#~ A perfect number has factors (divisor == factor?) that
+    #~ sum up to itself
+
+from factors import FACTORS
+
+
+def IS_PERFECT(N):
+    factors = FACTORS(N)
+    factor_sum = 0
+    for i in len(factors):
+        factor_sum += factors(i)
+    if (factor_sum == N):
+        return True
+    else:b h
+        return False
+#+END_SRC
+
+*** Prime 
+
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+from minus import MINUS
+from remainder import REMAINDER
+
+# from book
+# does not identify 1 correctly
+
+def PRIME(N):
+    if N == 0:
+        return False
+    cell = 2
+    for i in range(MINUS(N,2)):
+        if REMAINDER(N,cell) == 0:
+            return False
+        cell += 1
+    return True
+#+END_SRC
+*** Goldbach 
+
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+# every even number can be represented as the sum of two primes
+
+from prime import PRIME
+from minus import MINUS
+
+# Incrementally search each number less than the target number. If the
+#	current number is a prime, then check if the target number less the
+#	current number is also a prime. If so, we have found the two primes
+# 	which make N a Goldbach number.
+ 
+def GOLDBACH(N):
+    cell = 2
+    for i in range(N):
+        if PRIME(cell) and PRIME(MINUS(N, cell)):
+            return True
+        cell += 1
+    return False
+#+END_SRC
+*** Tortoise Pair 
+
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+# Goldback conjecture: 
+#	every even number can be represented as the sum of two primes
+# Tortoise property:
+#	An even number, 2N, has the Tortoise property if it is the 
+#	difference of two odd primes.
+
+# WHAT IS A TORTOISE PAIRS RELATION TO A TORTOISE #?
+# two odd primes, where one minus the other is a Tortoise #.
+
+
+# Check if given numbers are a Tortoise pair
+#--------------------------------
+
+# True if M and M+N prime
+# Are AND operations allowed?
+# seems like multiply, so should be
+
+# All prime numbers, except 2, are odd.
+# If both numbers are primes, and neither is equal to 2,
+#	then they are both odd primes.
+
+from prime import PRIME
+
+def TORTOISE_PAIR(M,N):
+    return (PRIME(M) and PRIME(M+N))
+#+END_SRC
+
+** Unsure 
+*** Pi digits
+
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+#   pi/6 = 1/1^2 + 1/2^2 . . . 
+# Haven't checked for legality
+# doesn't actually find the digit
+
+from numpy import sqrt, pi
+
+# How do you put a bound on the sequence, so we
+#   can get to a desired d.p.
+
+# Riemann related:
+def PI_RIE(N):
+    if N == 0:
+        return 0
+    ans = 0
+    for i in range(1,N):
+        #~ print i**2
+        frac = 1.0/(i**2)
+        ans += frac
+        #~ print frac
+    return sqrt(ans*6)
+
+# Nilakantha sequence
+def PI_THA(N):
+    d_fac = 3 # middle factor in denominator
+    sign = 1
+    ans = 3
+    for i in range(N):
+        frac = sign * 4.0/((d_fac-1)*d_fac*(d_fac+1))
+        ans += frac
+        d_fac += 2
+        sign *= -1        
+        print('%i\t%.20f\t%.20f' % (i, ans, ans - pi))
+    return ans
+    
+#~ print PI_THA(0)
+#~ print PI_THA(1)
+#~ print PI_THA(2)
+print PI_THA(1000000) # 14 digits until error hits (numerical error)
+
+#~ print PI_DIGIT(0)
+#~ print PI_DIGIT(1)
+#~ print PI_DIGIT(2)
+#~ print PI_DIGIT(300)
+
+# Ideas:
+#~ Use regular polygons
+#~ find relationship between accuracy and number of sides of polygon
+#+END_SRC
+
+
+** FlooP 
+
+*** prime beyond
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+# Not bloop
+
+# The lowest prime number beyond N
+
+from prime import PRIME
+
+def PRIME_BEYOND(N):
+    number_beyond = N+1
+    # loops indefinitely
+    while(1):
+        if (PRIME(number_beyond)):
+            return (number_beyond)
+        else:
+            number_beyond++
+#+END_SRC
+
+*** Tortoise
+
+#+BEGIN_SRC python :tangle ~/python/GEB/BlooP.py
+
+# Not bloop.
+#   There are plenty of numbers greater than N, I can even think of
+#   three off-the-cuff; N+7, N+37, N+101!
+# Don't know how long we might have to wait until we get a good one. . .
+
+# Tortoise property:
+#   An even number, 2N, has the Tortoise property if it is the 
+#   difference of two odd primes.
+
+# Check if a given number, N, has the tortoise property
+#--------------------------------
+
+Psuedocode:
+def TORTOISE(N):
+    poke around for a few different prime1's and prime2's:
+    if prime1-prime2 = N
+        return true
+    else
+        return false
+#+END_SRC
+#+END_COMMENT
