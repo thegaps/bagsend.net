@@ -1,0 +1,36 @@
+---
+title: Laptop or Tablet?
+published: 2016-11-27
+status: finished
+modified: 2016-11-27
+---
+
+If you are trying to make this decision you might read articles written by major technology reporters. These articles tend to look like a sales brochure[1]. They are showcases of the latest technology, which might not be the most suitable, and is the most expensive. If you are uncertain of what you need from a computer, you probably do not need the latest offering.
+# When buying a car it is better to determine what you want, before going to a dealership and getting 
+# This establishes them as /the authority/ - any other guide is out of date right?
+# However, I find these sites less than helpful.
+*** Making sensible tech purchase decisions
+
+In general, when approaching what-should-I-get dilemmas like this it is best to ask yourself questions /before/ you browse what is commercially available. Once you have established your desires the rest will fall into place. This is your defence against getting strung along with concern for some particular feature that you've been convinced to care about.
+
+Asking yourself questions can make the difference between getting something that fits your wants, or ending up drowned in comparison battles. Battles that probably don't translate into whether a particular product is suited to you, but are just the latest seasons pissing contest. E.g. If your heart is tearing at the idea of a 150 ppi vs a 220 ppi display, take a breath and step back. You probably don't care.
+
+# But of course, I'm out to be contrary - I'm writing this on an 5 year old laptop[2].
+Assuming you have mostly used laptops and desktops as your major computing experience thus far, here is a simple question that I think captures most of the situation:
+
+*** Do you use your keyboard or your mouse more?
+e.g, can you get by for almost an entire session using the mouse alone, or do you find you use the keyboard and only have brief excursions with the mouse?
+  
+If yes, then consider using a laptop.
+
+If no, then consider using a tablet.
+
+
+*** But I don't know what I want?
+I'm going to suggest something outrageous.
+
+Don't shop for, or buy, anything.
+
+If you do want something you will discover this by eventually incurring small pains. These should indicate what you actually want. E.g. I had to send this email on my phone and it was hard because I didn't have something bigger to write it on - therefore I want something to write emails on.
+[1] [[https://www.google.com/search?&q=laptop+or+tablet][Google: laptop or tablet]]
+[2] Biggest complaint? 1366 x 768 is a little too small 5% of the time. Some modern UI's seem to want a bit more room.
