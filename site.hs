@@ -17,7 +17,11 @@ import Data.Monoid ((<>)) -- I suspect this is the same as `mappend`
 main :: IO ()
 main = hakyll $ do
 
-    match "images/*" $ do
+    match "docs/**" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "images/**" $ do
         route   idRoute
         compile copyFileCompiler
 
