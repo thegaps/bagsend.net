@@ -33,6 +33,7 @@ main = hakyll $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= loadAndApplyTemplate "templates/footer.html" postCtx
             >>= relativizeUrls
 
 -- duplicate post add for .org files
@@ -41,6 +42,7 @@ main = hakyll $ do
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= loadAndApplyTemplate "templates/footer-with-source.html" postCtx
             >>= relativizeUrls
 
     create ["archive.html"] $ do
@@ -55,6 +57,7 @@ main = hakyll $ do
             makeItem ""
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                >>= loadAndApplyTemplate "templates/footer.html" postCtx
                 >>= relativizeUrls
 
 
@@ -70,6 +73,7 @@ main = hakyll $ do
             getResourceBody
                 >>= applyAsTemplate indexCtx
                 >>= loadAndApplyTemplate "templates/default.html" indexCtx
+                >>= loadAndApplyTemplate "templates/footer.html" postCtx
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateBodyCompiler
