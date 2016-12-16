@@ -33,7 +33,7 @@ all content of this website is released under the
 [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons
 Attribution-ShareAlike 4.0 International License]]. This excludes images and content shared from other sources, which will (hopefully) be noted as appropriate.
 # That's right, I can't even give this away!
-Code hosted on Github is under the licence in its repository. 
+Code hosted on my [[https://github.com/thegaps][Github]] is under the licence in its repository. 
 
 Finally, while I may strive for accuracy in the minority of posts, I
 disclaim that anything I say bears anything more than a passing
