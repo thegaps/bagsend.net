@@ -80,7 +80,8 @@ main = hakyll $ do
 postCtx :: Context String
 postCtx =
     -- modificationTimeField "modified" "%B %e %Y" `mappend` -- based on filesystem mod times
-    dateField "date" "%B %e, %Y" `mappend`
+    -- ~ dateField "date" "%B %e, %Y" `mappend`
+    dateField "date" "%F" `mappend`
     -- ~ constField "modified" "July 9, 2016" `mappend`
     defaultContext --`mappend` -- <>
     -- looks like metatdataField is already part of it?
