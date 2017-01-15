@@ -18,13 +18,11 @@ Let's see what happens.
 
 ** Technical
 
-This website is generated using Hakyll, and is all very boring which
+This website is generated using Hakyll, and is all very boring[1] which
 means no Javascript is used. Though in future I might try out something
 like [[https://piwik.org/][Piwik]] for some delicious stats.
 
-My present process for updating and generating the website is
-cumbersome. However I expect this to change, so it is not worth
-documenting at present.
+The source of this website is freely available on [[https://github.com/thegaps/bagsend.net][Github]]. If the holes in the networking cheese align each post will have a working link in the footer to the source document it was produced from.
 
 ** Licence
 
@@ -38,3 +36,5 @@ Code hosted on my [[https://github.com/thegaps][Github]] is under the licence in
 Finally, while I may strive for accuracy in the minority of posts, I
 disclaim that anything I say bears anything more than a passing
 resemblance to reality.
+
+[1] I tend to think of it as being clean.
