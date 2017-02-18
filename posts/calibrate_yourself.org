@@ -1,0 +1,92 @@
+---
+title: Calibrate Yourself
+published: 2016-10-26
+created: 2016-10-26
+modified: 2017-02-18
+status: in progress
+---
+
+# Making measurements without equipment
+
+While flying low on the approach to an airport[1], I started wondering how high we were. A common enough thought. This presented a problem - I felt like I had few means to satisfy this curiosity. The use of phones was prohibited during the approach - so there was no GPS or barometer on hand that I could use.
+
+In hindsight I suppose I could have asked the attendant, or tried gaining intimate knowledge of typical approach parameters for a variety of common passenger aircraft and airports... 
+Yawn.
+
+I wanted to know how high we were somehow, so... What do I know?
+- I suppose I am best at estimating lengths of 1 mm to 10 m by sight[2]. Outside this range my estimates get real hairy, and I couldn't tell 1 km from 5 km[3].
+- $s=r\theta$
+- I know the approximate size of many objects that are visible from an airplane window; houses, cars, roads.
+
+I looked at my fingers and mulled a little. They could help me. If I knew the size of a smallish object and held it in front of me at a known distance then I can define a sector of my vision, which is a known angle. A smallish object that I will likely always carry with me is my thumbnail. This looked a little shy of $20 mm$ so I went with $18 mm$.
+
+Thanks to an old friend's junior science project[4], I recall that people (at least the little ones that we were at the time) have an arm-span that is approximately equal to their height. Knowing I am $\approx 1.8 m$ tall, I could then say that my outstretched arm would rest somewhere a little less than $0.9 m$ from my eyes (accounting for triangles and such). Make that $0.75 m$ from the eye on the same side as my outstretched arm.
+
+
+* Cranking it out
+
+The size of the angle I make by the width of my thumbnail when my arm is outstretched is:
+
+$\theta = s / r$
+
+$\theta = 18 mm / 750 mm$
+
+$\theta = 0.024$
+
+\\To make this useful for getting distances:
+
+$distance_{object} = length_{object} / \theta$
+
+$distance_{object} = length_{object} \times 1/\theta$
+
+
+\\And:
+
+$1 / \theta = 1/0.024$
+
+$1 / \theta = 41.67$
+
+I rather happily rounded the above to _42_.
+
+\\Which makes:
+
+$distance_{object} = length_{object} \times 42$
+
+Units for distance and length don't matter as long as the same unit is used for both.
+
+# 20mm 850mm
+# 16mm 680mm
+# 18 750
+
+
+All super simple stuff that could be done a myriad of ways (similar triangles would save a step). Still, it managed to give the old mind something to chew on for a bit.
+
+* Post flight check
+How off were my estimates?
+
+$width_{thumbnail} = 16.5mm$
+
+$distance_{eyeToThumbnail} = 0.79m$
+
+#+BEGIN_COMMENT
+
+* What else could we do?
+This wields just like a small superpower. What other powers of measurement sans equipment might we be able to attain?
+[[https://en.wikipedia.org/wiki/List_of_human-based_units_of_measure][The official list.]]
+
+
+- Length
+- Mass
+- Light
+- Sound
+- Pressure
+- Force (+torque)
+- Radiation
+- Heat
+#+END_COMMENT
+
+
+[1] We were flying at a low altitude for longer than I was used to - this was my first time flying in a Convair CV-580.
+[2] I would expect to be within $\pm 40 %$ of the correct length in this range.
+[3] or my picometre's from my femtometre's.
+[4] A classroom poll and associated measure-up summarised by the title "Are you a square or a rectangle?".
