@@ -68,6 +68,7 @@ $width_{thumbnail} = 16.5mm$
 
 $distance_{eyeToThumbnail} = 0.79m$
 
+Which would make the magic number 48, not 42. [cramps arm, sticks with 42].
 #+BEGIN_COMMENT
 
 * What else could we do?
@@ -86,7 +87,11 @@ This wields just like a small superpower. What other powers of measurement sans 
 #+END_COMMENT
 
 
+
+* Some days after ...
+[[../images/calibrate yourself/calibrated_hitchhiker.gif]]
+
 [1] We were flying at a low altitude for longer than I was used to - this was my first time flying in a Convair CV-580.
-[2] I would expect to be within $\pm 40 %$ of the correct length in this range.
+[2] I would expect to be within $\pm 40 \%$ in this range.
 [3] or my picometre's from my femtometre's.
 [4] A classroom poll and associated measure-up summarised by the title "Are you a square or a rectangle?".
