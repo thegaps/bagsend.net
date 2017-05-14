@@ -1,0 +1,218 @@
+---
+title: Bad-ass hackers
+published: 2017-04-29
+created: 2016-04-29
+modified: 2017-05-14
+status: in progress
+---
+Hollywood has made sure we all know it - hackers type fast into blazing terminals, /with dark colour schemes/.
+
+Heh.
+
+In comparison this keyboard chimp feels like most of their terminal type is spent slowly poking in =sudo apt-get thisprogramwillfinallymakemehappy-0.21-dev= the majority of the time.
+
+Instant truth check[2]:
+  #+BEGIN_SRC bash
+  history|awk '{print $4}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -30
+
+      955 ls
+      573 git
+      446 cd
+      348 sudo (followed by "apt-get" 67 times)
+      296 cat
+      204 nano
+      189 stack
+      158 grep
+      115 python3
+       98 rm
+  #+END_SRC
+
+ So I'm telling filthy lies; it is actually =ls= that takes the title[3].
+
+  At any rate, I would like to be as cool as the movie hackers, but only when I deserve it. 
+
+[3] Maybe I could see what life is like if I get bash to perform an =ls= following each =cd= or similar. That would cut down on 1527 keystrokes right?. Or you could have a split view with a constantly updated file list separate from the command prompt - I'll bet this exists.
+
+[2] http://stackoverflow.com/a/6355236
+
+Note I had to change the column of the first print to 4, as my bash history has a couple more columns than the default.
+
+* What if...
+/any CLI user was just a heart-racing, keyboard pounding, step away from being movie-cool?/
+
+I set out to make a terminal that graphically changes depending on the current typing speed. Give me a lowly black on white terminal when I'm slow, and a green on black one when I'm typing fast.
+
+Ideally this would be a general purpose terminal - e.g. bash, that has some kind of overlay that does the shenanigans. 
+* Make the things
+** What's going on
+ The first lesson I had was that I wasn't just using Bash.
+ This should have been obvious because I put =gnome-terminal= in my startup list to open what I called a 'terminal'. Actually I had a terminal-emulator: gnome-terminal, and a shell: bash.
+ I definitely can't fault the program names for my ignorance!
+** How should it work?
+ I want to run gnome-terminal, just because.
+
+#  gnome-terminal starts bash, then passes input to it, and receives output from it.
+Q. Do I want to:
+ 1) Make a program that is a wrapper for bash:
+
+     gnome-terminal<->wrapper<->bash
+
+ 2) Make a program that picks up all low level HID input
+ 3) Make a program that wraps gnome-terminal
+
+
+A. A wrapper for bash seems most sensible. That way, only input to the specific terminal being used would be captured.
+** Toolbox...
+Search keywords to proceed: "wrapper for interactive shell"
+
+Leads:
+ - =script= logs a session
+
+    You can use =script= to write all terminal input and output to a file. Except it doesn't work? Well ok it does, but =cat= can't handle it. It also doesn't write constantly.
+
+ - =cat - | bash= does something.
+
+    (Takes stdin and pipes it to a bash process.
+    Magically, stdout makes its way back to the parent bash shell. But we lose pretty terminal colours...)
+
+ - =expect=
+   - ooh ooh oh =Pexpect=!
+
+      It has an example that works like script.
+
+ - =xinput test=
+    
+    Let's you access the input stream, and provides stats.
+
+
+# good infos https://www.lifewire.com/subshells-in-bash-scripts-2200581
+# echo "pv has other uses too!" | pv -q -L 5
+
+* COMMENT working
+Q. How does input get to gnome-terminal?
+
+A. Something something subshell
+
+ I can open a bash subshell by opening gnome-terminal (opens interactive bash session) and running =bash=. It then runs like a normal interactive bash shell, I can exit it with, well, uh, waddyaknow, it's =exit=. If I run a bash subsession, I need to make sure the input gets there and the output gets out to the terminal emulator.
+
+* COMMENT How to change colour
+This will mean sending commands to some aspect of gnome-terminal.
+Following:
+https://unix.stackexchange.com/questions/133914/set-gnome-terminal-background-text-color-from-bash-script
+
+
+* what /is/ that?
+
+Well, I made something.
+
+#+BEGIN_SRC bash
+
+#!/bin/bash
+
+# Try to change gnome-terminal profile colours based on rough keypress rate
+# jank_level = High
+# Response dynamics are magical and atrocious
+#     fast to start with, then /really/ damped
+#     I blame my usage of pv
+# there is also a horrible contrast period when green is coming up
+
+# bash profile to modify dynamically
+bprofile="t37621as-3343-1dds-ffe3-2bj4uf87sd3h"
+
+# This doesn't do what I hoped
+buffersize=10
+
+# This kinda sets the translation speed
+delay=0.01 # 0.1s seems OK
+
+# Green channel of text when bg is dark. Red and Blue always = 0
+greenMax=160
+
+# spawn a subshell to get keypresses using xinput.
+(xinput test 10 | pv -lfa -s "$buffersize" > /dev/null 2> keylog.log) &
+
+# Init things for the Big Ol' Loop
+# 255 = white background
+# 0   = black background
+background=0
+backgroundLast=0
+bg=255
+fgG=0
+
+# Big Ol' Loop. We stay in here and update the background colour
+while true; do
+	typeRate=$(grep "[0-9]*\.[0-9]*" --only-matching keylog.log | tail -1)
+
+	# do math with python
+	# get blacker as we get faster
+	# magic number breakdown:
+	#     -2 is an attempt to compensate for the latency of typeRates
+	#     40 is a scaling factor
+	background=$(echo "print(255-min(255,int((float($typeRate)-2)*40)))" | python)
+	
+	# adjust background at the same rate
+	if [ $background -lt $backgroundLast ]
+	then
+		let bg-=1
+	fi
+	if [ $background -gt $backgroundLast ]
+	then
+		let bg+=1
+	fi
+
+	# Change the text colour if we get quite dark
+	if [ $bg -lt 40 ]
+	then
+	        let fgG+=1
+	elif [ $bg -lt 100 ]
+	then
+	        let fgG+=2
+	else
+	        let fgG-=1
+	fi
+
+	# Limit the allowable ranges
+	if [ $bg -gt 255 ]
+	then
+		let bg=255
+	fi
+	if [ $bg -lt 0 ]
+	then
+		let bg=0
+	fi
+
+	if [ $fgG -gt $greenMax ]
+	then
+		let fgG=$greenMax
+	fi
+	if [ $fgG -lt 0 ]
+	then
+		let fgG=0
+	fi
+
+	printf "Type Rate: % 10.2f\tBackground Target: % 10.2f\tBackground Current: % 10.2f\tForeground G: % 10.2f\n" "$typeRate" "$background" "$bg" "$fgG"
+
+	# write the background to gnome-shell profile
+	dconf write /org/gnome/terminal/legacy/profiles:/:"$bprofile"/background-color "'rgb($bg,$bg,$bg)'"
+
+	# write the foreground to gnome-shell profile
+	dconf write /org/gnome/terminal/legacy/profiles:/:"$bprofile"/foreground-color "'rgb(0,$fgG,0)'"
+
+	backgroundLast=$bg
+
+	sleep $delay
+
+done
+
+#+END_SRC
+
+Usage:
+
+Don't[4].
+
+[4] Alternatively; Do. It kinda works. Running this script will usually require sudo to access keyboard input. Be sure to change the =bprofile= variable to suit.
+
+* Improvements
+
+- Everything
+- Find a way of ensuring there is constant / rapid motion of the terminal window
