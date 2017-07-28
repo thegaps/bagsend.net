@@ -2,7 +2,7 @@
 title: An entertaining problem
 published: 2016-07-15
 status: finished
-modified: 2016-07-15
+modified: 2017-07-29
 ---
 
 Recently, I was trying to type a capital "Q"[1]. Instead of "Q" I kept getting a "T".
@@ -33,8 +33,9 @@ Shoot!
 
 I can't type a "Q" to fix not being able to type a "Q". A lovely sense of being in a silly trap flushed over me. Cool!
 
-After basking in the ~Great Silly~, my fix was to copy and paste the blessed, momentarily unreachable, character from the [[https://en.wikipedia.org/wiki/Queen_(band)][Queen Wikipedia page]]. Thanks Queen.
+After basking in the ~Great Silly~, my fix was to copy and paste the blessed, momentarily unreachable, character from +this post+ [2] the [[https://en.wikipedia.org/wiki/Queen_(band)][Queen Wikipedia page]]. Thanks Queen.
 
 I'm adding this to my new list - "Small things going wrong in Ubuntu which are more entertaining than stressful."
 
 [1] You'll just have to take my word for it.
+[2] Mum won't let me create [[https://en.wikipedia.org/wiki/Causal_loop][Causal Loops]] anymore. For a while I was often late to dinner, before fixing things so I wasn't. She didn't like not knowing if I had been late to dinner in an earlier time-line. "Being late in one time-line is one time too many!".
