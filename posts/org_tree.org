@@ -1,0 +1,264 @@
+---
+title: Org Tree
+published: 2017-07-15
+status: finished
+modified: 2017-07-30
+---
+
+/Preamble:/
+
+#+BEGIN_QUOTE
+As happens now and then I run off and try to make a small dinky thing. Sometimes this process follows a predictable pattern:
+1) Wouldn't it be neat if =X= existed? (where =X= is some tool or function, e.g [[./kitty.html][cat on keyboard detector]], [[./badass_hacker.html][colour changing terminal]])
+2) Search, Does it already exist?
+   1) google, github, reddit
+   2) trying to find the right keywords!
+   3) rinse + repeat until research apathy sets in (also excitement at the growing prospect of a new project)
+3) Nothing found, start making it myself
+4) How do I do =Y=? (on the way to implementing =X=)
+5) Find a SO question
+   1) Question: "I want to do =Y=, I'm trying to do =X=, here is my work so far". (how did I not find this before?)
+   2) Answer: "this is a solved problem, use =Z="
+   3) =Z= = =X=. Just what I was looking for!
+
+I would dig having a word or term for this process[4].
+#+END_QUOTE
+/Moving on to today's "=X=".../
+[4] This scenario feels close to "the quickest way to find the right answer is to publish to wrong one".
+
+* Tree visualisation for org-mode files
+/Disclaimer:/
+#+BEGIN_QUOTE
+ This does not use emacs, elisp, and does not tie in nicely with that eco-system. I don't know how to drive these, so my solution is in Python.
+#+END_QUOTE
+** Itch
+ I keep a few org files[2] as the primary method of recording and organising what I do on a computer (and outside one). It works so well I am tempted to look at the org-mode system itself, this grand system, and wonder how it works, and what it can do[1]. Denying this kind of temptation is not on my list of abilities.
+
+ Basic org-mode files can be interpreted as tree structures, with nodes defined by the various headlines. I can kind of see this by cycling through the views =S+Tab= provides. It would be neat to see this tree format explicitly, with pretty nodes and whatnot.
+
+[1] Perhaps being so close to the 'metal' when using org mode helps you think about how the system works. There are no hidden structures waiting to be clanged into life by activating the right switch.
+
+[2] E.g. this page. Link to org source below.
+
+** Scratch
+I've already pottered around with PyOrgMode a little[3].
+ Toolbox:
+ - Python
+   - argparse (a standard addition to scripts)
+   - PyOrgMode (parsing org-mode files)
+   - anytree (displaying tree structures, export pictures or with text, cool \smiley{})
+
+The basic flow of the solution is;
+1) Handle CL arguments
+2) Load org file with PyOrgMode
+3) Load org file structure with PyOrgMode
+4) Init a tree structure for anytree
+5) Read the root node in the org file structure with =gobbleBranch=
+   1) If it has children, send them to =gobbleBranch=
+   2) If not, return
+6) Print the tree (text to stdout)
+7) Print the tree (image)
+
+First up, let's handle the basic I/O to get us started:
+
+#+BEGIN_SRC python :tangle ~/python/orgTree/orgTree.py
+#!/usr/bin/python2.7
+
+# Source tangled from org_tree.org
+
+# Prints an org mode files outline (headlines only,
+#     actual names given to the nodes are configurable)
+# TODO:
+# Seems sensitive to headline length.
+# Incorrect results w/ out of order nesting, e.g:
+# * h1
+# *** h2
+# ** h3
+
+from PyOrgMode import PyOrgMode
+from anytree import Node, RenderTree
+import argparse as ap
+
+# Handle arguments
+parser = ap.ArgumentParser(description="Creates an image of the tree structure of an org file")
+parser.add_argument("-v", "--verbose",
+action="store_true")
+nodeNameControl = parser.add_mutually_exclusive_group()
+nodeNameControl.add_argument("-n", "--number-headings",
+action="store_true",
+ help="Don't include heading text in output, number them on discovery instead. Cannot use in conjunction with -l.")
+nodeNameControl.add_argument("-l", "--len-heading",
+type=int,
+ metavar='X',
+ default=-1,
+ help="Limit the number of characters kept from org file headings to 'X'. 'X' = 0 will keep all characters. Cannot use in conjunction with -n.")
+parser.add_argument("org",
+ type=str,
+ help="the input org file")
+parser.add_argument("image",
+ type=str,
+ help="the output image")
+args = parser.parse_args()
+v = args.verbose
+
+# if using the node heading as a node name;
+#    how many chars to keep? (-1=all)
+nodeHeadingTruncatedLength = args.len_heading
+
+# Load the org file
+tree = PyOrgMode.OrgDataStructure()
+tree.load_from_file(args.org)
+
+#+END_SRC
+
+
+Then we can define a helper function to determine what we should name our output nodes. Note that collision in node names will result in these nodes being treated as the same node in the image (but not the text) output of anytree.
+
+#+BEGIN_SRC python :tangle ~/python/orgTree/orgTree.py
+def nodeHead(node):
+    '''
+    Returns the heading to use for a node
+    '''
+    nodeHead.counter += 1
+    heading = ''
+    try:
+	if nodeHeadingTruncatedLength == -1:
+	        heading = node.heading
+	else:
+		heading = node.heading[:nodeHeadingTruncatedLength]
+    except:
+        if v: print("heading is zero-length (I think)")
+        heading = "<>" # use some symbols to stand for 'empty'
+    if args.number_headings: heading = nodeHead.counter
+    if v: print(nodeHead.counter, heading)
+    return heading
+nodeHead.counter = 0
+
+#+END_SRC
+
+Another helper (probably) determines if an object is a PyOrgNode node.
+
+#+BEGIN_SRC python :tangle ~/python/orgTree/orgTree.py
+def isNode(nodeCandidate):
+    '''
+    Super rough way of picking whether an instance is a node or something else
+    Should use type() once classes in PyOrgMode library are updated
+    '''
+    return (18 <= (len(dir(nodeCandidate))) <= 19)
+
+#+END_SRC
+
+I never studied computer science (see code directly above!). Hearing 'traverse this tree' does not conjure up a classroom memory of classic methods for navigating tree structures, along with the various features of each method. So, I kinda just used the first method that worked.
+
+#+BEGIN_SRC python :tangle ~/python/orgTree/orgTree.py
+trunk = tree.root # org file root
+currentNode = trunk
+root = Node("root") # init our anytree root node
+lastNode = root
+def gobbleBranch(node,lastNode):
+    '''
+    Traverse!
+    1) record node name
+    2) if there are child nodes, repeat the proces with one of them
+    3) if there are no children, pop back, and move along to the next node
+    4) if there is no next node, quit
+    
+    Gonna need to learn about function scope w/ recursive calls
+    '''
+    if v: print("\ngobbling node")
+    if v: print(nodeHead(node))
+    #if v and node.content: print(node.content)
+    #if v: print(len(dir(node)))
+    if len(node.content) == 0:
+        # Hit rock bottom, node does not contain text
+        # Record this node, then return
+        if v: print("_0_\nheading: {}\t level:{}".format(nodeHead(node),node.level))
+        newNode = Node(nodeHead(node), parent=lastNode)
+    else:
+        # Node has something which could be children. Recursively call this function for all legitimate node-children
+        lastNode = Node(nodeHead(node), parent=lastNode)
+        for nextNode in node.content:
+            if isNode(nextNode) and isinstance(nextNode, PyOrgMode.OrgElement):
+                gobbleBranch(nextNode,lastNode)
+    return
+
+# Traverse the tree
+gobbleBranch(trunk,lastNode)
+
+#+END_SRC
+
+Looking at it now, I think this method might be categorised as preorder (left to right), depth first search.
+
+At this point we have converted the org document structure to a tree structure in anytree, so we can do what we like. We will get our text and image outputs:
+
+#+BEGIN_SRC python :tangle ~/python/orgTree/orgTree.py
+# The location of the root node is a bit off
+actualRoot = root.children[0]
+actualRoot.name = "Org File Root"
+
+# Render the tree in text
+for pre, fill, node in RenderTree(actualRoot):
+    # two ways to do the same thing
+    #print("{}{}".format(pre.encode('utf-8'), node.name.encode('utf-8')))
+    print("%s%s" % (pre, node.name))
+
+# Render the tree as an image
+from anytree.dotexport import RenderTreeGraph
+RenderTreeGraph(actualRoot).to_picture(args.image)
+
+# Source tangled from org_tree.org
+
+#+END_SRC
+
+Voila!
+
+All that is left is to export (tangle) these code blocks together to form =orgTree.py=.
+
+[3] I used it to make NotifyOSD notifications which have text pulled from random TODO headings.
+
+** Results
+
+Naturally, the first org file I will point =orgTree.py= at will be /this/ file [5]. So I'll feed it with: =./orgTree.py org_tree.org org_tree_tree.png=, then it plugs and it chugs, and it prints the entire tree out:
+
+**** CLI output:
+#+BEGIN_EXAMPLE
+Org File Root
+└── Tree visualisation for org-mode files
+    ├── Itch
+    ├── Scratch
+    ├── Results
+    │   ├── CLI output:
+    │   ├── Graphical output:
+    │   └── Using the =-n= flag:
+    └── Notes
+#+END_EXAMPLE
+
+**** Graphical output:
+  [[../images/org_tree/org_tree_tree.png]]
+
+**** Using the =-n= flag:
+[[../images/org_tree/org_tree_tree_num.png]]
+This shows the order in which each node was visited.
+
+  #+BEGIN_COMMENT
+  This process lead me to realise that I use two different structures of organisation in org.
+  1) Top down. The universe is catagorised with more abstract or 'broad' headings at the top level. Each successively nested heading is a sub-component, or part of the heading.
+  2) Journal. Date structure. narrowing definition of time, at the bottom level time is given in minutes.
+  3) Projects. Titles. Then overview, research, implementation, results.
+  #+END_COMMENT
+
+** Notes
+In a variation of the theme mentioned in the preamble, it was at this point I discovered Sacha Chua has done a neat job of this /in emacs/. Her [[http://sachachua.com/sharing/evil-plans.html][approach]] is surely a superior solution, though I have not tackled trying to make it run yet.
+
+There are bugs.
+1) Some characters in headlines (or content?) crash anytree. There might be a difference in failure modes depending on output.
+2) Incorrect results are given w/ out of order nesting, e.g:
+#+BEGIN_EXAMPLE
+ * h1
+ *** h2
+ ** h3
+#+END_EXAMPLE
+
+The tangled output of this file is available on [[https://github.com/thegaps/orgTree][github]].
+
+[5] You could say I'm doing this for it's own sake. It's a nesty business.
