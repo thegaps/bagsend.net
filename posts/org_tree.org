@@ -2,7 +2,7 @@
 title: Org Tree
 published: 2017-07-15
 status: finished
-modified: 2017-07-30
+modified: 2017-08-04
 ---
 
 /Preamble:/
@@ -32,13 +32,14 @@ I would dig having a word or term for this process[4].
  This does not use emacs, elisp, and does not tie in nicely with that eco-system. I don't know how to drive these, so my solution is in Python.
 #+END_QUOTE
 ** Itch
- I keep a few org files[2] as the primary method of recording and organising what I do on a computer (and outside one). It works so well I am tempted to look at the org-mode system itself, this grand system, and wonder how it works, and what it can do[1]. Denying this kind of temptation is not on my list of abilities.
+ I keep a few org files[2] as the primary method of recording and organising what I do on a computer (and outside one). I'm so impressed that I am tempted to look at the org-mode system itself, this grand system, and wonder how it works, and what it can do[1]. Denying this kind of temptation is not on my list of abilities.
 
- Basic org-mode files can be interpreted as tree structures, with nodes defined by the various headlines. I can kind of see this by cycling through the views =S+Tab= provides. It would be neat to see this tree format explicitly, with pretty nodes and whatnot.
+ Basic org-mode files can be interpreted as tree structures[6], with nodes defined by the various headlines. I can kind of see this by cycling through the views =S+Tab= provides. It would be neat to see this tree format explicitly, with pretty nodes and whatnot.
 
 [1] Perhaps being so close to the 'metal' when using org mode helps you think about how the system works. There are no hidden structures waiting to be clanged into life by activating the right switch.
 
 [2] E.g. this page. Link to org source below.
+[6] 'Basic' meaning the only association between headlines is position. Headings could also have other relationships, such as a shared tag, creation timestamps for the same date, or any other property in common.
 
 ** Scratch
 I've already pottered around with PyOrgMode a little[3].
@@ -218,7 +219,7 @@ All that is left is to export (tangle) these code blocks together to form =orgTr
 
 ** Results
 
-Naturally, the first org file I will point =orgTree.py= at will be /this/ file [5]. So I'll feed it with: =./orgTree.py org_tree.org org_tree_tree.png=, then it plugs and it chugs, and it prints the entire tree out:
+Naturally, the first org file I will point =orgTree.py= at will be /this/ file[5]. So I'll feed it with: =./orgTree.py org_tree.org org_tree_tree.png=, then it plugs and it chugs, and it prints the entire tree out:
 
 **** CLI output:
 #+BEGIN_EXAMPLE
@@ -237,8 +238,11 @@ Org File Root
   [[../images/org_tree/org_tree_tree.png]]
 
 **** Using the =-n= flag:
-[[../images/org_tree/org_tree_tree_num.png]]
-This shows the order in which each node was visited.
+(/and a bit of magic[7]/)
+[[../images/org_tree/org_tree_tree_num_anim.gif]]
+The node numbering shows the order in which each node was visited.
+
+[7] [[https://github.com/mapio/GraphvizAnim][GraphvizAnim]]
 
   #+BEGIN_COMMENT
   This process lead me to realise that I use two different structures of organisation in org.
