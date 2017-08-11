@@ -2,7 +2,7 @@
 title: Simple activity logging
 created: 2016-06-22
 published: 2016-06-22
-modified: 2017-04-08
+modified: 2017-08-12
 status: finished
 ---
 
@@ -221,14 +221,17 @@ I have barely looked at the logs. The exception to this is to delete a screencap
 # * when I run =streamer= from the shell it copies text into the terminal input. Doesn't seem to be a problem, not sure what is happening though.
 ** Perspective seven months later:
 The last log I have from this was from 2016-11-23.
-I am again pursuing the Quantified Self dream. Somehow I have managed to /not/ find any software in a similar class to this little doohickey here, until now[4]. I didn't find similar programs until I went to implement them myself, found a StackOverflow answer from someone doing the same thing, and saw an answer that was essentially "don't worry about trying to get that working, go and look at this pre-existing software that does what you want".
+I am again pursuing the Quantified Self dream. Somehow I have managed to /not/ find any software in a similar class to this little doohickey here, until now[4]. I didn't find similar programs until I went to implement them myself, found a StackOverflow answer from someone doing the same thing, and saw an answer that was essentially "don't worry about trying to get that working, go and look at this pre-existing software that does what you want"[5].
 The pre-existing software being:
 - [[https://arbtt.nomeata.de][arbtt]]
 - [[https://github.com/gurgeh/selfspy][selfspy]]
+** Even longer term perspective:
+I know this was useful at least once - it cleared up whether I had done a particular task.
 
 [1] This is not hypocritical, I consider blogging to be relatively productive (for
 now at least).
 [2] Along with the unquestioned assumption that the highest interest rates
 known to man apply to time invested in productivity gains. 
-[3] Though that is probably because that is the primary way I waste time on my computer. 
+[3] Though that is probably because that is the primary way I waste time on my computer.
 [4] With the exception of a bit of Windows software that popped up on /. some time this past year. IIRC it takes screenshots and possibly captures all text on screen to record in a DB (goes to find a link, can't).
+[5] I noted this process at work when starting [[./org_tree.html][Org Tree]] too.
