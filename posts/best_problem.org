@@ -11,7 +11,7 @@ Oh no!
 
 It seemed I had lost the proud letter which is the very beginning of the name of my keyboard layout. You can't have "QWERTY" without "Q".
 
-Thankfully, I recalled I was messing with my [[https://en.wikipedia.org/wiki/X_keyboard_extension][XKB]] keyboard config while trying to get a [[./footpedal.html][USB Foot Switch]] working. At one point I was testing to see if my changes to =/usr/share/X11/xkb/us= were having an effect (they were). So I popped that file open again and saw:
+Thankfully, I recalled I was messing with my [[https://en.wikipedia.org/wiki/X_keyboard_extension][XKB]] keyboard config while trying to get a [[./footpedal.html][USB Foot Switch]] working. At one point I was testing to see if my changes to =/usr/share/X11/xkb/symbols/us= were having an effect (they were). So I popped that file open again and saw:
 
 
 #+BEGIN_SRC
