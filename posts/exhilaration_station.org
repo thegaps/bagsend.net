@@ -1,0 +1,79 @@
+---
+title: Exhilaration station
+published: 2017-08-14
+status: finished
+modified: 2017-08-14
+---
+
+# While poking around for a controllable LED on my computer[1] (for a [[./blinky_grew_up.html][blinky]] project), I saw the entries:
+While poking around for a controllable LED on my computer[1], I saw the entries:
+
+#+BEGIN_EXAMPLE
+/sys/class/backlight/acpi_video0/
+/sys/class/backlight/intel_backlight/
+#+END_EXAMPLE
+
+I wonder what's in those...
+#+BEGIN_EXAMPLE
+actual_brightness
+bl_power
+brightness
+max_brightness
+power
+type
+uevent
+#+END_EXAMPLE
+
+Oh! Could controlling the LCD backlight be that simple?
+
+I read the value stored in =brightness= under both the =acpi_video0= and =intel_backlight= folders, while changing the backlight brightness using the keys on the keyboard. Turns out, it is that simple - the values in these files changes with the brightness of the display backlight.
+
+=acpi_video0/brightness= holds values from 0 (dimmest), to 15 (brightest).
+
+At the same time:
+
+=intel_backlight/brightness= varied from 47 (dimmest), to 3000 (brightest).
+
+47.
+
+Hmm. 47 is not 0.
+
+Could I turn it off completely? And is =intel_backlight/brightness= my lever?
+
+I tested writing to the file.
+
+Wrote 3000 to the file, all good... 2000, fine, 1000, getting dimmer, 100, 80, 50, getting low[2].
+
+** Poking the dragon
+
+/Uncautiously proceeding, (with caution):/
+
+ It would be pretty foolish if you locked yourself out from a perfectly functioning latop because you simply turned the backlight off and couldn't see anymore. Buuut I need to know, and researching an answer hardly sounds entertaining...
+
+40, 30, 20. Yup, it can go below 47.
+10? Yup.
+5, 4...
+
+The tension kept building, so I made a quick script to venture further; Set it as low as I dared, then right back up (twice).
+
+  #+BEGIN_SRC bash
+  #!/bin/bash
+  echo 3 | sudo tee /sys/class/backlight/intel_backlight/brightness
+  sleep 3
+  echo 2 | sudo tee /sys/class/backlight/intel_backlight/brightness
+  sleep 3
+  echo 1 | sudo tee /sys/class/backlight/intel_backlight/brightness
+  sleep 3
+  echo 0 | sudo tee /sys/class/backlight/intel_backlight/brightness # AHHHH!
+  sleep 3
+  echo 3000 | sudo tee /sys/class/backlight/intel_backlight/brightness # Phew
+  sleep 1
+  echo 3000 | sudo tee /sys/class/backlight/intel_backlight/brightness
+  #+END_SRC
+
+3, 2, 1, 0 (oh snap)... and it came back!
+
+/walks away whistling while the laptop screen strobes frantically./
+
+[1] Turns out all of them are. Linux is awesome!
+[2] no pictures b/c you can't take screenshots of this process...
