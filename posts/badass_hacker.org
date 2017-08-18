@@ -2,14 +2,14 @@
 title: Bad-ass hackers
 published: 2017-04-29
 created: 2016-04-29
-modified: 2017-05-14
-status: in progress
+modified: 2017-08-19
+status: thrown to the winds
 ---
 Hollywood has made sure we all know it - hackers type fast into blazing terminals, /with dark colour schemes/.
 
 Heh.
 
-In comparison this keyboard chimp feels like most of their terminal type is spent slowly poking in =sudo apt-get thisprogramwillfinallymakemehappy-0.21-dev= the majority of the time.
+In comparison this keyboard chimp feels like most of their terminal type is spent slowly poking in =sudo apt-get install thisprogramwillfulfillmydreams-0.21-dev= the majority of the time.
 
 Instant truth check[2]:
   #+BEGIN_SRC bash
@@ -27,7 +27,7 @@ Instant truth check[2]:
        98 rm
   #+END_SRC
 
- So I'm telling filthy lies; it is actually =ls= that takes the title[3].
+ So I'm telling fibs; it is actually =ls= that takes the title[3].
 
   At any rate, I would like to be as cool as the movie hackers, but only when I deserve it. 
 
@@ -47,7 +47,7 @@ Ideally this would be a general purpose terminal - e.g. bash, that has some kind
 ** What's going on
  The first lesson I had was that I wasn't just using Bash.
  This should have been obvious because I put =gnome-terminal= in my startup list to open what I called a 'terminal'. Actually I had a terminal-emulator: gnome-terminal, and a shell: bash.
- I definitely can't fault the program names for my ignorance!
+ I definitely can't fault the program names for my ignorance.
 ** How should it work?
  I want to run gnome-terminal, just because.
 
@@ -62,6 +62,8 @@ Q. Do I want to:
 
 
 A. A wrapper for bash seems most sensible. That way, only input to the specific terminal being used would be captured.
+
+Unfortunately I'm not sure how to go about implementing this, and my random search for solutions (below) lead to a different design.
 ** Toolbox...
 Search keywords to proceed: "wrapper for interactive shell"
 
@@ -78,7 +80,7 @@ Leads:
  - =expect=
    - ooh ooh oh =Pexpect=!
 
-      It has an example that works like script.
+      It has an example that works like =script=.
 
  - =xinput test=
     
@@ -206,13 +208,22 @@ done
 
 #+END_SRC
 
-Usage:
+This script monitors the keyboard input using =xinput test= [5], and writes the type rate to a file, alarmingly called keylog.log. A loop is run which does some bad math and clunky edge-case handling to determine what colours to set in a =gnome-terminal= profile.
 
-Don't[4].
+*** Usage
+
+  Don't[4].
 
 [4] Alternatively; Do. It kinda works. Running this script will usually require sudo to access keyboard input. Be sure to change the =bprofile= variable to suit.
 
+[5] You'll need to figure out what number you keyboard shows up as. I don't know an intelligent way of doing this.
+
+*** Demo
+  #+BEGIN_HTML
+  <video id="hackyterm in action" src="../images/badass_hacker/hackyterm.webm" autoplay loop></video>
+  #+END_HTML
 * Improvements
 
 - Everything
-- Find a way of ensuring there is constant / rapid motion of the terminal window
+- Find a way of ensuring there is constant / rapid motion of the terminal window- make it more exciting
+- The dynamics of the process is broken - it slows down after as more keys are pressed
