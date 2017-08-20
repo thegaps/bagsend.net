@@ -2,8 +2,15 @@
 title: Keyboards and Kitties (stub)
 created: 2016-07-04
 published: 2016-07-04
+modified: 2017-08-20
 status: abandoned
 ---
+
+/Disclaimer:/
+
+#+BEGIN_QUOTE
+The following ramble does not result in any code. It provokes the desire, but does not include the performance.
+#+END_QUOTE
 
 # *** Trouble-makers
 My friend recently related to me the mischief their little kitten causes. A mad dash across the keyboard can close a playing movie, move a file, or open programs at random. I think this is pretty funny. This is an ancient problem, with well-established solutions. The easiest to implement are 'kitty-traps', which can be as simple as a cardboard box near your computer.
