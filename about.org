@@ -1,6 +1,8 @@
 ---
 title: About this site
 published: 2016-05-17
+created: 2016-05-17
+modified: 2017-09-16
 status: ongoing
 ---
 ** Purpose
@@ -24,6 +26,24 @@ like [[https://piwik.org/][Piwik]] for some delicious stats.
 
 The source of this website is freely available on [[https://github.com/thegaps/bagsend.net][Github]]. If the holes in the networking cheese align each post will have a working link in the footer to the source document it was produced from.
 
+** Openness
+How much of this website and all related material is actually public? The posts are obviously publically available, as is the source code for the site. But there is additional material:
+- drafts
+- todos and ideas (meta)
+- general website organisation notes and scratchpad (meta)
+I set out to quantify the amount of material in each category. A naive formualation for the openness of this website can be defined:
+#+BEGIN_QUOTE
+$$\%openness = \sum lines_{published}/\sum lines_{unpublished}$$
+#+END_QUOTE
+The intention is that this website will to move towards being 100 % open[fn::I suspect that $lines_{published}$ grows at a faster rate than $lines_{unpublished}$, so this openness metric will probably tend towards 100 % over time anyway, without any special action.].
+**** Current status
+ | Category    | Num lines |
+ |-------------+-----------|
+ | Published   |      1881 |
+ | Draft       |       732 |
+ | Meta        |       996 |
+ | Grand Total |      3609 |
+ | /% Open/    |   /52.12/ |
 ** Licence
 
 Unless otherwise noted in the specific resource (webpage, image etc.),
