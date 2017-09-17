@@ -39,11 +39,11 @@ The intention is that this website will to move towards being 100 % open[fn::I s
 **** Current status
  | Category  | Num lines |
  |-----------+-----------|
- | Published |      2145 |
+ | Published |      2104 |
  | Draft     |       509 |
  | Meta      |       311 |
- | Total     |      2965 |
- | /% Open/  |   /72.34/ |
+ | Total     |      2924 |
+ | /% Open/  |   /71.96/ |
 
 ** Licence
 
