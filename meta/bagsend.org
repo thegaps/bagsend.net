@@ -1,0 +1,338 @@
+_Disclaimer:_
+I have made this file public as a small experiment in sharing.
+This does not mean that I expect this file to be useful to anyone in anyway. I suspect the opposite. Here you will find a hodge-podge of not much.
+Good day.
+* Bagsend
+** Advice from http://chromaticleaves.com/slides/smartstaticsites/#/13/4
+*** Try pelican (python!)
+*** use bootstrap or foundation
+** AWS
+grump about no $ cap
+https://forums.aws.amazon.com/thread.jspa?start=50&threadID=58127&tstart=0
+
+** Comment functionality
+https://news.ycombinator.com/item?id=6818416
+http://www.discourse.org/
+https://github.com/mpalmer/jekyll-static-comments
+https://staticman.net/
+https://github.com/skx/e-comments
+
+I think this is where I stop using a static site.
+** default CSS
+*** viewport shenanigans
+want to make it Mobile friendly
+
+  /*
+  snippet from 
+  https://developers.google.com/webmasters/mobile-sites/mobile-seo/responsive-design
+  Lets the device set the width
+  */
+
+The meta viewport tag lets it scale, but is ugly on desktop -> want page to max out at 600 px or so.
+
+changed width to max-width in body. Did nothing afaik
+
+but if I put an empty div block before body, then it works...
+
+I don't get it!
+I think the names here are supposed to match with the names in the .html.
+From that it looks like *body* is the important one - it is the post body.
+
+In fact, nothing I change in body seems to have effect...
+When I comment out meta viewport it works.
+
+ohhhh is the meta supposed to be in the .html?
+Yeah, I think so.
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+goes in .html. Changine width to max-width in body now does te trick. It seems to work without meta viewport in the html.
+
+I will add it to the .html -> google mobile check doesn't like it.
+
+Note that gwern has it in his .html
+** foundation
+having trouble putting it on.
+need to copy folder to _site
+but can't even get web based to work
+
+some kind of autogenerate is at work.
+get a different data-tabs generated each time I reload the working example.
+
+If I copy the working one into the root of bg:
+
+works if I have:
+
+  <link rel="stylesheet" href="foundation/css/foundation.css">
+   <script src="foundation/js/vendor/jquery.js"></script>
+   <script src="foundation/js/vendor/foundation.min.js"></script>
+
+doesn't work if I have:
+  <link rel="stylesheet" href="foundation/css/foundation.css">
+   <script src="/foundation/js/vendor/jquery.js"></script>
+   <script src="/foundation/js/vendor/foundation.min.js"></script>
+
+those forward slashes!
+** Hakyll
+https://jaspervdj.be/hakyll/reference/Hakyll-Web-Template-Context.html#v:defaultContext
+https://jaspervdj.be/hakyll/tutorials/04-compilers.html
+http://beerendlauwers.be/posts/2016-04-29-hakyll-adding-to-loadall.html
+
+** Learning the lay of the land
+*** Static site generators
+Software that creates websites whose pages are static HTML; the HTML is not generated on the fly. These sites might still contain Javascript & the like.
+*** Markup:
+A language for writing documents that includes syntax for special representation, e.g. links, images, italics.
+*** Pandoc
+Converts between different markup formats
+Can actually handle .org files, at least in a limited way!
+https://zeitkraut.de/posts/2014-02-28-emacs-org-mode.html
+Sweet!
+*** Hakyll
+A static site generator.
+In Haskell
+Uses pandoc
+Not sure what it does
+organises files, images etc?
+
+Pretty much just feeds pandoc with various rules set in site.hs. Then adds extra html templates to the output. + some miscellaneous tags, metadata, niceties
+*** Math
+**** Image based
+Using imagemajick
+Old school, no JS.
+**** MathJax
+Modern, standard.
+Uses javascript loaded from AMS to display math.
+*** Org mode abilities
+**** Math
+Can handle math, using LaTex
+e.g:
+
+\begin{equation}
+x=\sqrt{b}
+\end{equation}
+
+If $a^2=b$ and \( b=2 \), then the solution must be
+either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].
+
+The above can be displayed in emacs using:
+
+And reverted back to source using:
+
+**** HTML export
+Can export to HTML.
+Includes math.
+This is handy, but this is only per file. So, I would have to recompile every file that gets changed, or even just have a one page webpage (bad idea).
+Need emacs to handle a /website/ not just a webpage.
+**** Latex export
+Can't handle URL's in section titles.
+Nesting depth limit?
+**** Tangling
+Will have to try this out with a simple script
+*** Emacs static site generators
+**** using pandoc on org files.
+Need separate file per post
+Looks super legit though
+** Mass adjusted life years.
+Do fat people actually live for longer, if we count mass, or number of cells, not single beings?
+
+Entered on [2016-08-13 Sat 11:42]
+** Pandoc
+*** Trying to customise pandoc options
+**** tried to add extra module by _ in stack.yaml:
+
+ # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
+ extra-deps:
+ - text-1.2.2.
+
+
+ OR could probably have gone =stack install text=
+
+ maybe https://docs.haskellstack.org/en/stable/GUIDE/
+
+
+*** What goes through Pandoc
+ Anything in a post makes it to the output. Though Comment blocks do appear to be handled as expected.
+ 
+ Commented out stuff in html templates makes it trough to the output.
+** Publishing
+ currently have a wobbly script. could look at just using git, and then having a hook on git push to also run a sync with the server
+** Site generation
+*** Hung process
+find pid:
+sudo netstat -nlp|grep 8000
+kill:
+kill -1 pid
+** Standards
+*** footnotes
+[fn::actually, not actually]
+"The quoted advice suggests that, if a footnote consists of a phrase or sentence fragment, you need not capitalize it or end it with a period (or any other end punctuation). Otherwise capitalise"
+** Stats
+wordcounts
+Use final output - includes html
+Use org input - includes comments
+
+ideal - count in org
+This is the sensible approach. Will try, if fail leave it for a better time
+
+How to count in org?
+can get counts in mode bar
+But frequencies?
+** Versioning and 'behind the scenes' would be so cool - different tabs at the top, built in evolution of the page. Git is definitely a gem here :)
+** Webcam
+*** Ended up on the subject of periodically capturing webcam and screen images.
+ No idea how I ended up chasing this.
+ Anyway, it's all set up now.
+ And I can say that the most exciting way to hack is to set up a cron job running every minute, on a script you are trying to get to work. I displayed seconds in the notifications area so I could see when the minute was about to roll over & I would have to save and watch the new attempt fail/suceed.
+** Website examples / style
+http://idlewords.com/talks/website_obesity.htm
+
+
+
+* Todo's
+** TODO Automatic modified timestamps
+   :PROPERTIES:
+   :CREATED:  [2017-03-12 Sun 21:52:24]
+   :END:
+** TODO Can you sustain windows 10 on dailup?
+   :PROPERTIES:
+   :CREATED:  [2017-03-31 Fri 22:59:43]
+   :END:
+** TODO Category trees
+** TODO Consider a 'now' page
+   :PROPERTIES:
+   :CREATED:  [2017-07-05 Wed 19:12:34]
+   :END:
+to replace the 'about' page
+** TODO footpedal see http://xahlee.info/kbd/kinesis_foot_pedal.html
+** TODO Get a favicon! I've done this before :) 
+   :PROPERTIES:
+   :CREATED:  [2016-12-13 Tue 07:02:53]
+   :END:
+** TODO How did Ohm make his measurements?
+   :PROPERTIES:
+   :CREATED:  [2017-03-12 Sun 21:43:43]
+   :END:
+** TODO https://jaspervdj.be/hakyll/tutorials/using-teasers-in-hakyll.html
+   :PROPERTIES:
+   :CREATED:  [2017-08-19 Sat 11:59:49]
+   :END:
+** TODO indent body text a little compared to headings 
+   :PROPERTIES:
+   :CREATED:  [2016-12-17 Sat 00:15:58]
+   :END:
+** TODO Kind of want justified text again. 
+   :PROPERTIES:
+   :CREATED:  [2016-11-27 Sun 10:18:48]
+   :END:
+It's weird though right?
+** TODO Length of post in home view
+** TODO Look at moving a post to an org file which exports an org file which is the post 
+   :PROPERTIES:
+   :CREATED:  [2016-11-27 Sun 09:18:06]
+   :END:
+That way I can have my own comments and background mish mash on a post
+** TODO Noob post. What is this hakyll thing?
+   :PROPERTIES:
+   :CREATED:  [2017-02-03 Fri 07:21:15]
+   :END:
+** TODO show basic usage on github 
+   :PROPERTIES:
+   :CREATED:  [2016-12-17 Sat 00:52:41]
+   :END:
+** TODO Tags
+** TODO Top level design 
+   :PROPERTIES:
+   :CREATED:  [2016-12-17 Sat 10:48:38]
+   :END:
+Maybe I could move to a single org file that captures the relations between posts.
+Then that gets exported to individual org files which get pandoctored...
+** TODO update webcam, look at showing version history. Scripts in git? fancy js overlay? Something that combines both? 
+ Entered on [2016-09-24 Sat 01:22]
+** TODO Where's all my math? can't frac{}{} :(
+   :PROPERTIES:
+   :CREATED:  [2017-02-19 Sun 09:20:27]
+   :END:
+** IN PROGRESS Post on open self, start discussing it 
+ Entered on [2016-09-13 Tue 06:18]
+** IN PROGRESS Want to share this _entire_ project
+   :PROPERTIES:
+   :CREATED:  [2017-09-16 Sat 07:48:05]
+   :END:
+Could be a 'meta' section of the site. Or maybe 'dev'.
+Would share my workings, and my todos.
+
+Do I really need a private place for bagsend notes?
+- server set up
+
+So maybe it is best that I keep some things private. Though it could be an early test-bed of radical openness.
+
+** OPT post blurbs?
+** OPT Move to new drafts system
+what is the new drafts system?
+
+I think http://www.limansky.me/posts/2015-10-31-Draft-posts-with-Hakyll.html
+might be the way to go.
+
+BUT.
+This is work and effort so in future I can put off *completing* things. Seems bad. If anything I want pressure to complete things. I suppose there is a balance to not making it easy to start. I think that is less of a problem. Also C-c c n capture template exists and is pretty legit.
+*** also see:
+**** https://www.jdreaver.com/posts/2014-06-22-math-programming-blog-hakyll.html
+**** http://geekplace.eu/flow/posts/2014-09-24-draft-posts-with-hakyll.html
+** DONE Ask jasper to be on the cool peoples blog list 
+   :PROPERTIES:
+   :CREATED:  [2016-12-23 Fri 16:53:22]
+   :END:
+   - State "DONE"       from "IN PROGRESS" [2017-03-18 Sat 15:39]
+
+** DONE Footpedal update 
+   - State "DONE"       from "TODO"       [2016-09-21 Wed 21:48]
+there's a bunch of comments there ready to be expanded & included
+
+ Entered on [2016-09-15 Thu 06:12]
+** DONE Github [9/9]
+    - State "DONE"       from "TODO"       [2016-10-01 Sat 11:27]
+ Do I still want my own repo surrounding the github main site repo?
+ I think the only thing in it at this stage would be =
+
+ How do I check everything, all files all history?
+ Check branch history. -> master is pretty much the same
+
+ Aha!
+ Drafts!
+ Where do they go?
+ => In my own repo surrounding it.
+
+*** DONE Check content [2/2]
+    - State "DONE"       from "TODO"       [2016-10-01 Sat 11:10]
+**** DONE As is
+     - State "DONE"       from "TODO"       [2016-10-01 Sat 10:41]
+**** DONE All versions
+      - State "DONE"       from "TODO"       [2016-10-01 Sat 09:08]
+ Too hard. Will just have to start day 0 from now.
+*** DONE Check git
+     - State "DONE"       from "TODO"       [2016-10-01 Sat 09:10]
+ Not doing history
+*** DONE Move leak
+    - State "DONE"       from "TODO"       [2016-10-01 Sat 10:29]
+*** DONE Archive current git.
+     - State "DONE"       from "TODO"       [2016-10-01 Sat 09:14]
+ Have local_host.git
+*** DONE Check .folders
+    - State "DONE"       from "TODO"       [2016-10-01 Sat 10:41]
+*** DONE user set
+    - State "DONE"       from "TODO"       [2016-10-01 Sat 11:10]
+*** DONE Publish
+    - State "DONE"       from "TODO"       [2016-10-01 Sat 11:17]
+*** DONE Recheck online in github
+    - State "DONE"       from "TODO"       [2016-10-01 Sat 11:27]
+
+** DONE Have links to source on each page 
+   :PROPERTIES:
+   :CREATED:  [2016-12-14 Wed 22:41:57]
+   :END:
+   - State "DONE"       from "IN PROGRESS" [2016-12-17 Sat 09:53]
+** DONE Hitchiking comic
+   :PROPERTIES:
+   :CREATED:  [2017-02-19 Sun 10:00:43]
+   :END:
+   - State "DONE"       from "IN PROGRESS" [2017-09-16 Sat 19:01]
+Added to 'calibrate'

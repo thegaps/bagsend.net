@@ -37,13 +37,14 @@ $$\%openness = \sum lines_{published}/\sum lines_{unpublished}$$
 #+END_QUOTE
 The intention is that this website will to move towards being 100 % open[fn::I suspect that $lines_{published}$ grows at a faster rate than $lines_{unpublished}$, so this openness metric will probably tend towards 100 % over time anyway, without any special action.].
 **** Current status
- | Category    | Num lines |
- |-------------+-----------|
- | Published   |      1881 |
- | Draft       |       732 |
- | Meta        |       996 |
- | Grand Total |      3609 |
- | /% Open/    |   /52.12/ |
+ | Category  | Num lines |
+ |-----------+-----------|
+ | Published |      2145 |
+ | Draft     |       509 |
+ | Meta      |       311 |
+ | Total     |      2965 |
+ | /% Open/  |   /72.34/ |
+
 ** Licence
 
 Unless otherwise noted in the specific resource (webpage, image etc.),

@@ -1,0 +1,72 @@
+---
+title: 
+published: [2017-06-14 Wed]
+status: in progress
+modified: [2017-06-14 Wed]
+---
+There is a lamp on my bedstand. It has a spherical shade. You can ping the shade with a fingernail, and hear it ring quite clearly. What tone(s) is it making?
+* The not-googling-yet guess
+The sphere is roughly 0.12 m in diameter.
+Perimeter = 0.377 m
+Perimeter/2 = 0.188 m
+
+I suppose the fundamental tone will be that made when my fingernail causes a node where it strikes. At the lowest frequency this could me that there is an anti-node on the opposite side of my strike. That is, there is only one node, and one anti-node present for this fundamental tone. I suppose this to exist.
+
+What would the lowest frequency be if this was the case?
+
+Assuming this could be treated as a string...
+$v = f \times lambda$
+
+I think the material is steel, v = 5920 $ms^-1$. Dang that's fast!
+
+Though this varies wildly with material, so put a big fat $\pm 1000 ms^-1$ on that.
+
+$f = v / lambda$
+$f = 5920 / 0.188$
+$f = 31.5 kHz$
+
+Wrong!
+
+I can hear it, so it clearly isn't that. If anything, by ear I would say the lowest tone is 1 to 5 kHz.
+
+What gives?
+
+I can't picture a vibration with a longer wavelength occuring on the surface of a sphere. I suppose the entire sphere could epxand / contract as one - making one node in total. But that seems completely implausible.
+
+Wikipedia to the rescue!
+https://en.wikipedia.org/wiki/Acoustic_resonance#Sphere_of_air_.28vented.29
+
+The hole is quite large, say 0.08 m in diameter.
++Using the dry air @ 20 deg c assumption:+
+Using http://www.sengpielaudio.com/calculator-airpressure.htm
+17.0 deg C
+1020 hPa
+73 % RH
+$342.35 ms^-1$
+
+f = v/pi sqrt(3d/8(0.85)D^3)
+f = (342.35/pi)*sqrt(3*0.08/(8*0.85*0.12**3))
+f = 492.4926517058918 Hz!
+
+Much more believable.
+* Reality check!
+Using some kind of measurement thing
+
+all -34 dB ish
+386
+647
+1153
+1828
+2180
+3050
+3427
+
+silence (background):
+nothing past -38 dB.
+
+=> pretty clear :)
+
+Soo what's the relation of these notes? 
+what would the first harmonic be?
+
+hmm messy

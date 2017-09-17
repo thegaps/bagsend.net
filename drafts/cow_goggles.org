@@ -1,0 +1,39 @@
+---
+title: Experiments in Vision
+published: 2016-07-06
+created: 2016-07-06
+status: in progress
+---
+I bought a cheap pair of [[https://www.amazon.com/dp/B00CY9RQ2K/][glasses]] to read in bed some time ago. In addition to rotating your vision $~70\degrees$ downwards, they have the effect of sligtly demagnifying your vision, and blocking much of your peripheral vision.
+
+They are sold for reading in bed, mostly for the comfort of decepit people. I never found them more comfortable than just readjusting myself to read on my side or on my front over the pillow[1]. Which is fair enough, they were cheap and I am not their target market. However, they more than redeemed themselves as the general effect on your vision was particularly entertaining. 
+
+* Messing about
+For entertainment I would recommend trying:
+
+1) Following people around on pathways at night, at a small distance. The effect of a zoomed out, hard to concentrate on, almost murky view of the person in front of you is reminiscent of the the classic stalker re-enactment footage produced for unsolved murder mystery television programmes[2].
+
+2) In a similiar vein - walk around yourself and enjoy the effect. When your head is tilted back to compensate for the rotation, and arms outstretched, it only takes a little imagination to feel like you have become a zombie. I have no theories why, just lurch and groan a bit and enjoy the effect.
+
+* Bored of that, what else can we do?
+It's likely that this idea was seeded from a section of an Oliver Sachs book - cow lady?
+What would it be like to see like animals? What about one of those mammals that have eyes on the side of their head? That is obviously different. Landed on large herbivores as the typical animals to have ___ vision.
+
+Based on my model of 'seeing' in the mind[3]. Presumably the blank 'space' in their mind would be smaller, as they have a wider field of view. Presumably an animal with a full field of vision will have no blank space in their mind. I would guess that this would be true for animals with small blind spots too - a kind of memory might fill the area.
+
+** Cow vision 
+
+** Glasses mod
+I removed the prism with the usual techiques - jabbing and prying. There is a small patch of glue that hold the prism in place, on the top flat surface of the prism.
+
+* Effects
+No headache.
+Mild sickness.
+No change.
+Very noticable pitching the head. Each eye rotates in a different direction, creating two kaleidoscopic halves.
+
+It was entertaining to read further on the topic after the experiment and find that this was probably a terrible idea. I don't have a lazy eye because of this, yet.
+
+[1] The problems of comfortable reading in bed are well established.
+[2] Please make use of your friends for this, otherwise it might just be actual stalking.
+[3] It is a projection onto a dark blank sphere surrouding the mind - the observer. This is essentially stepping the problem back a step and ignoring it.

@@ -1,0 +1,25 @@
+---
+title: 
+published: [2017-06-15 Thu]
+status: in progress
+modified: [2017-06-15 Thu]
+---
+*  Calibrated test equipment.
+It's a phone.
+A aliexpress cheap thing
+Accelerometer unknown.
+9.8 g in z
+9.6 in x & y
+quick linearity check:
+balanced x + y:
+x + y => 9.6
+Seems good enough.
+
+Range?
+Could be 2.0g. Could be 4.0g. I could find out... with non-free applications!!
+** One more check
+very confusing. Shouldn't most of the action been in z?
+The sensitivity of x & y vs z seems different. z hardly moves. X & Y do. Z looks like it's low pass filtered. Nope. It has a strong non-linear component. The other channels are probably suss too.
+** 
+* Strap on, Rock on
+Using Androsens.
