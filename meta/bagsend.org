@@ -1,6 +1,6 @@
 _Disclaimer:_
 I have made this file public as a small experiment in sharing.
-This does not mean that I expect this file to be useful to anyone in anyway. I suspect the opposite. Here you will find a hodge-podge of not much.
+This does not mean that I expect this file to be useful to anyone in any way. I suspect the opposite. Here you will find a hodge-podge of not much.
 Good day.
 * Bagsend
 ** Advice from http://chromaticleaves.com/slides/smartstaticsites/#/13/4
@@ -75,7 +75,13 @@ those forward slashes!
 https://jaspervdj.be/hakyll/reference/Hakyll-Web-Template-Context.html#v:defaultContext
 https://jaspervdj.be/hakyll/tutorials/04-compilers.html
 http://beerendlauwers.be/posts/2016-04-29-hakyll-adding-to-loadall.html
-
+** Installation
+1) Install Hakyll
+2) hakyll-init bagsend.net
+3) cd bagsend.net
+4) git clone git@github.com:thegaps/bagsend.net.git
+5) ?
+6) build?
 ** Learning the lay of the land
 *** Static site generators
 Software that creates websites whose pages are static HTML; the HTML is not generated on the fly. These sites might still contain Javascript & the like.
@@ -184,10 +190,66 @@ But frequencies?
  And I can say that the most exciting way to hack is to set up a cron job running every minute, on a script you are trying to get to work. I displayed seconds in the notifications area so I could see when the minute was about to roll over & I would have to save and watch the new attempt fail/suceed.
 ** Website examples / style
 http://idlewords.com/talks/website_obesity.htm
+** Workflow
+*** A typical software mini-project I do might follow the following timeline:
+ 1) Start a project .org file
+    1) Could be in a project folder or in the bagsend drafts folder
+ 2) (in project file) write general descriptive ramble, describe project motivation 
+ 3) (in project file) collect links, random ideas. Maybe include some early code fragments
+ 4) start writing code
+    1) source usually located where it will be used, or in a project folder (outside bags)
+       1) use version control if it will be useful
+    2) less often, source starts out as a code block
+ 5) Continue to develop code
+    1) (in project file) ongoing results and references recorded in project file
+ 6) Collect neccessary data
+    1) Usually located in project folder, or bagsend docs folder
+ 7) Create a bagsend post
+    1) Either create a new document, or migrate existing project file to a post
+ 8) Publish bagsend post with script included in post body
+ 9) Continue to develop script in isolation, don't update anything else
+*** This raises the following (potential) problems:
+ 1) Posts don't get updated
+ 2) The latest version of code might not be available
+ 3) The post is usually written in a style that introduces an idea. It would be weird to just update the code without updating the surrounding post. Updating the post could mean a complete re-write, and possibly require changing the post tense.
+ 4) If a project is migrated to a post, there is no longer a place for random free-form cruft.
+*** These problems raise the following questions:
+ 1) What is the purpose of a post?
+    1) capture a snapshot of a project in time
+    2) be a complete reference for a project, as it develops over time
+    => I value both of these
+ 2) If a post is the only project file, and I go all-out using code blocks (no separate code files), how would version control work?
+    1) Would a bags post get an update every time a source code block changes?
+       1) then version control is pretty messy - no repo for code for just that project.
+	  1) Aha! but is there some git mechanism that would help?
+	     1) tags
+	     2) submodules
+ 3) Can I work efficiently with code-blocks? At the moment it adds an extra step to the coding process (more emacs-fu required)
+ 4) Should I make room somewhere for scripts I don't think are worth publishing at all?
+ 5) Do I want bags to be the process (slighlty polished) or one of many outputs of the process?
+    1) If the former then it might be more worthwhile to look at the project process I follow and tie that together, then look a methods of publishing it from the native format
+*** Thoughts:
+ I could use comment blocks to mitigate problem #4.
+ _Every little script_ having it's own repo seems overkill.
+*** Possible workflow #1
+1) start a draft org post
+2) write code / scratch around in draft post
+3) publish post (no longer draft)
+4) stop here if project is complete / abandoned, or continue if it warrants further development
+5) create org project file + project repo, in bagsend/projects/
+6) continue to develop code, use code blocks in project file
+7) project files are displayed somewhere on bags
+   1) probably don't want them put at the top of the landing page heap every time they are updated
+8) add link from inital post to project file
+9) continue to develop code, use code blocks in project file
+10) Anything remarkable from further dev could go into orignal post. Or into a new post. Or stay in the project file. Hmmm[fn::I think this is where the crux of the problem Im trying to solve has moved too. It's like: "Here is a problem with the task you want to do" (tosses problem). You can either: Solve it, determine the problem is insolvable, and is completely coupled to the desired task, or decrease the scope of effect of the problem so it is smaller than the task you want to achieve. Weak example: Task:Mow the lawns this week. Problem1: My lawns are made of diamond. Outcome: Mow lawns with superhard cutting blades. Problem2: I don't have any lawns. Outcome2: Don't mow the lawns. Problem3: The lawns don't exist on Wednesdays. Outcome3: Don't attempt to mow the lawns on a Wednesday.].
+* Tasks
+** TODO Consider adding a post property that indicates it's time-sensitivity
+   :PROPERTIES:
+   :CREATED:  [2017-09-18 Mon 23:22:10]
+   :END:
+Could be used to make the 'importance' field decay in time (at different rates)
 
-
-
-* Todo's
 ** TODO Automatic modified timestamps
    :PROPERTIES:
    :CREATED:  [2017-03-12 Sun 21:52:24]
@@ -203,10 +265,11 @@ http://idlewords.com/talks/website_obesity.htm
    :END:
 to replace the 'about' page
 ** TODO footpedal see http://xahlee.info/kbd/kinesis_foot_pedal.html
-** TODO Get a favicon! I've done this before :) 
+** DONE Get a favicon! I've done this before :) 
    :PROPERTIES:
    :CREATED:  [2016-12-13 Tue 07:02:53]
    :END:
+   - State "DONE"       from "IN PROGRESS" [2017-09-30 Sat 13:38]
 ** TODO How did Ohm make his measurements?
    :PROPERTIES:
    :CREATED:  [2017-03-12 Sun 21:43:43]
@@ -219,7 +282,7 @@ to replace the 'about' page
    :PROPERTIES:
    :CREATED:  [2016-12-17 Sat 00:15:58]
    :END:
-** TODO Kind of want justified text again. 
+** CANNED Kind of want justified text again. 
    :PROPERTIES:
    :CREATED:  [2016-11-27 Sun 10:18:48]
    :END:

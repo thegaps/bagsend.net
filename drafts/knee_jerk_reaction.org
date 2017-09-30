@@ -6,7 +6,7 @@ modified: [2017-06-15 Thu]
 ---
 *  Calibrated test equipment.
 It's a phone.
-A aliexpress cheap thing
+An aliexpress cheap thing
 Accelerometer unknown.
 9.8 g in z
 9.6 in x & y
@@ -20,6 +20,11 @@ Could be 2.0g. Could be 4.0g. I could find out... with non-free applications!!
 ** One more check
 very confusing. Shouldn't most of the action been in z?
 The sensitivity of x & y vs z seems different. z hardly moves. X & Y do. Z looks like it's low pass filtered. Nope. It has a strong non-linear component. The other channels are probably suss too.
-** 
+*** Digging deeper
+https://developer.android.com/guide/topics/sensors/sensors_motion.html
+https://code.google.com/archive/p/androsens2/source/default/source
+SensorInfo.java
+
+Work-around: rotate phone (for science) [fn::Sometimes it feels silly how something made by made that should be neatly structure and deterministic requires a /science/.]
 * Strap on, Rock on
 Using Androsens.

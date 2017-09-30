@@ -38,6 +38,7 @@ Category 1)
 published = glob.glob('../posts/*.org')
 published += glob.glob('../drafts/*.org')
 published += glob.glob('*.py')
+published += glob.glob('bagsend.org')
 pubLines = 0
 print("\nPublished items:")
 for pub in published:

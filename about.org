@@ -2,9 +2,10 @@
 title: About this site
 published: 2016-05-17
 created: 2016-05-17
-modified: 2017-09-16
+modified: 2017-09-30
 status: ongoing
 ---
+
 ** Purpose
 
 I iterated over a couple of longish drafts for this page. After
@@ -17,14 +18,21 @@ I anticipate this website will contain both long (gradually expanded and
 refined) and short (one-off cruft) content.
 
 Let's see what happens.
+** Guidelines
+ In the development of this site, there are some general guidelines I have been following:
+ - plain and simple[fn::I would love to say minimalist, but it just feels a bit too trendy. Then again... minimalist minimalist minimalist! Errm that word has started to look weird. Definition minimalist: A minimalist is somebody who holds prejudices about minimals. Definition minimals: Animals with a volume typically measured in tens of millilitres. Huh.]
+   - in presentation and technology
+   - no Javascript
+     - I might reluctantly compromise on the no-javascript principle in future, if a particular project or feature depends on it
+ - respect visitors[fn::Well, respecting their /privacy/. I don't respect visiting minds in general - refer to the content of this website :)]
+   - no services that might implement tracking are included[fn::Unfortunately this might change - Disqus looks pretty attractve on occassion.]
+ - openness / freedom (see below)
+   - trying to make 'published' the default
+   - GPL / CC's licensing
 
 ** Technical
 
-This website is generated using Hakyll, and is all very boring[1] which
-means no Javascript is used. Though in future I might try out something
-like [[https://piwik.org/][Piwik]] for some delicious stats.
-
-The source of this website is freely available on [[https://github.com/thegaps/bagsend.net][Github]]. If the holes in the networking cheese align each post will have a working link in the footer to the source document it was produced from.
+This website is generated using [[https://jaspervdj.be/hakyll/][Hakyll]]. Hakyll has provided all I need from a website generation tool - as you can tell by the lack of my tinkering with it. The source of this website is freely available on [[https://github.com/thegaps/bagsend.net][Github]]. If the holes in the networking cheese align, each post will have a working link in the footer to the source document it was produced from[fn::Please take this opportunity to be impressed.].
 
 ** Openness
 How much of this website and all related material is actually public? The posts are obviously publically available, as is the source code for the site. But there is additional material:
@@ -39,11 +47,11 @@ The intention is that this website will to move towards being 100 % open[fn::I s
 **** Current status
  | Category  | Num lines |
  |-----------+-----------|
- | Published |      2104 |
- | Draft     |       509 |
+ | Published |      2532 |
+ | Draft     |       482 |
  | Meta      |       311 |
- | Total     |      2924 |
- | /% Open/  |   /71.96/ |
+ | Total     |      3325 |
+ | /% Open/  |   /76.15/ |
 
 ** Licence
 
@@ -57,5 +65,3 @@ Code hosted on my [[https://github.com/thegaps][Github]] is under the licence in
 Finally, while I may strive for accuracy in the minority of posts, I
 disclaim that anything I say bears anything more than a passing
 resemblance to reality.
-
-[1] I tend to think of it as being clean.
