@@ -79,8 +79,8 @@ opennessPC = (pubLines/totalLines)*100
 print("""
 Summary:
 |Published|{:7}|
-|Draft|{:7}|
-|Meta|{:7}|
+|Draft (unpublished)|{:7}|
+|Meta (unpublished)|{:7}|
 |Total|{:7}|
 |% Open|{:7.2f}|
 """.format(pubLines,draftLines,metaLines,totalLines,opennessPC))

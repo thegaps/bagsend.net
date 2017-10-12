@@ -218,19 +218,34 @@ http://idlewords.com/talks/website_obesity.htm
     1) capture a snapshot of a project in time
     2) be a complete reference for a project, as it develops over time
     => I value both of these
- 2) If a post is the only project file, and I go all-out using code blocks (no separate code files), how would version control work?
+ 2) What catagories of _things_ do I want?
+    1) Posts and projects?
+       - what's the difference?
+    2) Structure reduced to 'primary' components? e.g Have the following objects (which are rehased as sensible):
+       - Introduction / motivation blurb
+       - code segment
+       - results / comments
+ 3) If a post is the only project file, and I go all-out using code blocks (no separate code files), how would version control work?
     1) Would a bags post get an update every time a source code block changes?
        1) then version control is pretty messy - no repo for code for just that project.
 	  1) Aha! but is there some git mechanism that would help?
 	     1) tags
 	     2) submodules
- 3) Can I work efficiently with code-blocks? At the moment it adds an extra step to the coding process (more emacs-fu required)
- 4) Should I make room somewhere for scripts I don't think are worth publishing at all?
- 5) Do I want bags to be the process (slighlty polished) or one of many outputs of the process?
-    1) If the former then it might be more worthwhile to look at the project process I follow and tie that together, then look a methods of publishing it from the native format
+    2) Can I work efficiently with code-blocks? At the moment it adds an extra step to the coding process (more emacs-fu required)
+    3) Should I make room somewhere for scripts I don't think are worth publishing at all?
+    4) Do I want bags to be the process (slighlty polished) or one of many outputs of the process?
+       1) If the former then it might be more worthwhile to look at the project process I follow and tie that together, then look a methods of publishing it from the native format
+ 4) Is this project at risk of being swallowed up by the drive towards a personal workbook? The success of this site (as a method to get /anything/ intelligible written down) might be dependant on it's current simplicity / loose format. The current way is not completely broken.
+    - Do not introduce more steps to be taken
+    - Keep changes small
 *** Thoughts:
  I could use comment blocks to mitigate problem #4.
  _Every little script_ having it's own repo seems overkill.
+The polar opposite is having many unrelated things in one repo. This causes problems: how do you go back to an earlier verion of project A (maybe to debug), without changing files in other projects. Can you do a checkout limited to certain files?
+Middle grounds:
+- everything in a shared repo 'pending'
+  - until they become big enough to justify their own repo
+- organise projects into catagories. Each catagory is a repo
 *** Possible workflow #1
 1) start a draft org post
 2) write code / scratch around in draft post
@@ -243,6 +258,47 @@ http://idlewords.com/talks/website_obesity.htm
 8) add link from inital post to project file
 9) continue to develop code, use code blocks in project file
 10) Anything remarkable from further dev could go into orignal post. Or into a new post. Or stay in the project file. Hmmm[fn::I think this is where the crux of the problem Im trying to solve has moved too. It's like: "Here is a problem with the task you want to do" (tosses problem). You can either: Solve it, determine the problem is insolvable, and is completely coupled to the desired task, or decrease the scope of effect of the problem so it is smaller than the task you want to achieve. Weak example: Task:Mow the lawns this week. Problem1: My lawns are made of diamond. Outcome: Mow lawns with superhard cutting blades. Problem2: I don't have any lawns. Outcome2: Don't mow the lawns. Problem3: The lawns don't exist on Wednesdays. Outcome3: Don't attempt to mow the lawns on a Wednesday.].
+*** Possible workflow #2
+1) Start a project in a literate org file
+2) Once viable:
+   1) org file gets version controlled
+   2) org file gets published on bags
+   3) org file gets pushed to github
+   4) tangled output automatically added to project folder, or maybe 'tangled' folder
+3) Continue dev, working in the version controlled org files
+   1) repeat push process - Bags gets update every git push, or maybe weekly
+
+A possible structure:
+- bagsend (bags repo root)
+  - projects
+    - project1.org
+    - project2.org
+    - code
+      - project1.py
+      - project2.py
+      - +complete_project.py+
+    - big_project (own repo, a submodule of bags)
+      - big_project.org
+      - code
+	- big_project.py
+      - data
+	- big_project.csv
+  - posts
+    - story1.org
+    - project2_introduction.org (links to ../projects/projec2.org)
+    - +complete_project.org+
+
+Where any code in a post does not get put anywhere else.
+Or each project could get it's own folder, whether a submodule or not. Seems tidier, and easier to transition between submodule status.
+Will sit on it [2017-10-11 Wed 22:25] ...
+
+A re-read shows that this is pretty much the same as #1.
+*** Actually different possible workflow #3
+1) All projects start in their own project folder, outside of bags.
+2) I might make a post on bags about a project, or something entirely different.
+3) It doesn't really matter
+*** Conclusion
+Do #1 and #2
 * Tasks
 ** TODO Consider adding a post property that indicates it's time-sensitivity
    :PROPERTIES:
