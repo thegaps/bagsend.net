@@ -7,6 +7,7 @@ Summarises the number of lines of (raw; mostly .org files, not html/images) cont
  4) Not included in any of the above:
         - The about / contact pages, because it would be silly if these weren't published
         - Site code, templates, config, images, docs. These are already all published on github.
+        - projects
 
 Summary is provided in format to C&P into about.org. Unsure how to best do this automatically.
 

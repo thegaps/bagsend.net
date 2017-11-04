@@ -291,20 +291,145 @@ A possible structure:
 Where any code in a post does not get put anywhere else.
 Or each project could get it's own folder, whether a submodule or not. Seems tidier, and easier to transition between submodule status.
 Will sit on it [2017-10-11 Wed 22:25] ...
+This decision is between: consistent (but often redundant) folder structures vs two different folder structures. Hmmm. A philosophical one. (psuedo) Flipped on it -  going with two different structures.
 
 A re-read shows that this is pretty much the same as #1.
+**** Refining the structure
+- bagsend (bags repo root)
+  - projects (projects repo root)
+    - project1.org (script sized project)
+    - project2.org
+    - tangled (small project outputs)
+      - project1.py
+      - project2.py
+      - project3.py (no .org needed)
+    - bigger_project (own repo, a submodule of projects)
+      - bigger_project.org
+      - code
+	- bigger_project.py
+      - data (if lot's of it)
+	- bigger_project.csv
+  - posts
+    - story1.org
+    - project2_introduction.org (links to ../projects/projec2.org)
+    - +complete_project.org+
+
+Why do the bigger projects need to be submodules at all? Why not have the bigger brojects just be untracked folders?
+What I do want is for the tidy, publishable version of projects to be elicted with a single command e.g. =~/projects $ git checkout master=. This will hide all junk files, temp files and WIP files, and let hakyll run over them all and make something useful of it.
+=> Keep bigger projects as submodules
+
+Extra introduction of hairiness:
+The first post of a project is already pretty close to a literate file.
+Do I then copy the first post to the project folder as project_name.org, then use the new file to generate future code? In the new file I would cut down on presentation as I develop the code.
+=> that sounds workable, if a little ugly. I suppose coming up with two catagories for anything means some awkward decisions about where edge cases should live.
+
+Ohhh this hits something, https://www.reddit.com/r/git/comments/3gt8ds/git_submodules_vs_symbolic_links/
+In short; what I'm trying to do is madness. Don't try to solve the problem of how to have projects in a format to be used by Hakyll by making nested arrangements of submodules and symbolic links. This problem is probably best solved by some kind of glue script, going from a set-up or structure that suits projects, to one that suits bags.
+
+Try this:
+- bags (repo)
+- projects
+  - small projects (repo)
+    - project1.org
+    - project1.py
+    - project2.org
+    - project2.py
+  - bigger_project3 (repo)
+    - project3.org
+    - project3.py
+Then some method of getting files from all projects for bags. Maybe have a manually written list of projects and then just grab HEAD?
 *** Actually different possible workflow #3
 1) All projects start in their own project folder, outside of bags.
 2) I might make a post on bags about a project, or something entirely different.
 3) It doesn't really matter
+*** What do other people do?
+Everything on github + decent github readme.
+If something fancier is required do a github-io (or is it pages?).
+This is probably a good option. Is there any lock-in, or are we still using local text documents?
 *** Conclusion
-Do #1 and #2
+Do #1 and #2.
+Seems a bit weird having /all/ projects in bags though... maybe put them in somewhere like ~/projects and symlink from bags?
+How should I do readme's on github then? In some cases the project .org might be basically code + readme. Then I tangle the code. Then I c&p the rest to become the readme. Seems like a complete waste of time. Why not just a readme and the code? (as is typical on github)
+
+A reason to use org files is to keep open an avenue for linking between projects, and organising projects more sensibly. I don't even think that follows though.
+
+So ~/projects needs to be a repo. Should it be a repo in it's own right? which is then a submodule to the bags repo? That seems reasonable.
+But, what if I want a project to be in the project repo, but not be on bags? Well, having multiple branches of the projects repo seems sensible - draft + published. Bags just checks out the published branch. tada!
+*** Some days later
+I have not worked on a project, but have worked on this re-shuffle. Time to get it out of the way.
+Data:
+- bags (repo)
+- projects
+  - littleProjects (repo)
+    - project1.org
+    - project2.org
+    - code
+      - project1.py
+      - project2.py
+  - bigger_project3 (repo)
+    - project3.org
+    - project3.py
+View
+- bags (site)
+  - posts
+    - post1, links to project1
+    - post2
+  - projects
+    - project1, links to project1.py
+**** projects in site.hs 
+The following will add all .org files found in the projects folder to the Projects list.
+#+BEGIN_SRC 
+
+    match "projects/**.org" $ do
+        route $ setExtension "html"
+        compile $ pandocCompiler
+            -- >>= loadAndApplyTemplate "templates/post.html"    postCtx
+            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= loadAndApplyTemplate "templates/footer.html" defaultContext
+            >>= relativizeUrls
+
+    create ["projects.html"] $ do
+        route idRoute
+        compile $ do
+            projects <- loadAll "projects/**.org"
+            let projectsCtx =
+                    listField "projects" defaultContext (return projects) `mappend`
+                    constField "title" "Projects"            `mappend`
+                    defaultContext
+#+END_SRC
+*** Planning the categories of org file to be made
+There are three different types of org files to be made:
+1) post (bags)
+   - introduces an idea. Scrappy code
+2) project page (bags)
+   - page holding thoughts on an idea, various links etc
+3) project readme (github)
+   - semi-formal project overview. Not for discussion
+
+I wanted 2) and 3) to be one thing. But the conventions surrounding 3) prevent me from doing so.
+
+Decision:
+1) create 2) and 3) separately
+2) Track 3) in git
+3) 2) follows usual github readme conventions
+
+So the process is now:
+1) Make post (presented on bags, stored in bags git)
+---- many projects stop here ----
+1b) Additional discussion in post (presented on bags, stored in bags git)
+---- if code further developed ----
+2) version control project files (project git started)
+3a) make readme (presented on github, stored in project git)
+---- if there's development discussion ----
+3b) Make project page (presented on bags, stored in project git)
+---- nothing new, only updates to any of above ----
 * Tasks
 ** TODO Consider adding a post property that indicates it's time-sensitivity
    :PROPERTIES:
    :CREATED:  [2017-09-18 Mon 23:22:10]
    :END:
 Could be used to make the 'importance' field decay in time (at different rates)
+As long as it's exponential. Demonstratably exponential effects on processes at a high level of abstraction are like candy to this wannabe mathematician.
 
 ** TODO Automatic modified timestamps
    :PROPERTIES:
@@ -344,11 +469,12 @@ to replace the 'about' page
    :END:
 It's weird though right?
 ** TODO Length of post in home view
-** TODO Look at moving a post to an org file which exports an org file which is the post 
+** CANNED Look at moving a post to an org file which exports an org file which is the post
    :PROPERTIES:
    :CREATED:  [2016-11-27 Sun 09:18:06]
    :END:
 That way I can have my own comments and background mish mash on a post
+Canned: Comments are good enough. This is against the idea of openness, /and/ is more complex.
 ** TODO Noob post. What is this hakyll thing?
    :PROPERTIES:
    :CREATED:  [2017-02-03 Fri 07:21:15]
@@ -357,6 +483,7 @@ That way I can have my own comments and background mish mash on a post
    :PROPERTIES:
    :CREATED:  [2016-12-17 Sat 00:52:41]
    :END:
+I don't even know how I'd get this going again.
 ** TODO Tags
 ** TODO Top level design 
    :PROPERTIES:
@@ -364,8 +491,10 @@ That way I can have my own comments and background mish mash on a post
    :END:
 Maybe I could move to a single org file that captures the relations between posts.
 Then that gets exported to individual org files which get pandoctored...
-** TODO update webcam, look at showing version history. Scripts in git? fancy js overlay? Something that combines both? 
+** DONE update webcam, look at showing version history. Scripts in git? fancy js overlay? Something that combines both? 
+   - State "DONE"       from "IN PROGRESS" [2017-11-04 Sat 16:12]
  Entered on [2016-09-24 Sat 01:22]
+In git. That's plenty.
 ** TODO Where's all my math? can't frac{}{} :(
    :PROPERTIES:
    :CREATED:  [2017-02-19 Sun 09:20:27]
@@ -455,3 +584,7 @@ there's a bunch of comments there ready to be expanded & included
    :END:
    - State "DONE"       from "IN PROGRESS" [2017-09-16 Sat 19:01]
 Added to 'calibrate'
+** TODO Collect some more website examples
+   :PROPERTIES:
+   :CREATED:  [2017-11-04 Sat 16:13:32]
+   :END:

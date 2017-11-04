@@ -2,7 +2,7 @@
 title: About this site
 published: 2016-05-17
 created: 2016-05-17
-modified: 2017-09-30
+modified: 2017-10-31
 status: ongoing
 ---
 
@@ -12,12 +12,13 @@ I iterated over a couple of longish drafts for this page. After
 reviewing these drafts I realised I could say it better with the
 following essential summary:
 
-*This website is my playground and vanity page.*
+*This website is my playground and vanity page.[fn::Well, let that be the party line at least. I do suspect that this site primarily exists to provide a place for the completely intoxicating practice of writing footnotes.]*
 
 I anticipate this website will contain both long (gradually expanded and
 refined) and short (one-off cruft) content.
 
 Let's see what happens.
+
 ** Guidelines
  In the development of this site, there are some general guidelines I have been following:
  - plain and simple[fn::I would love to say minimalist, but it just feels a bit too trendy. Then again... minimalist minimalist minimalist! Errm that word has started to look weird. Definition minimalist: A minimalist is somebody who holds prejudices about minimals. Definition minimals: Animals with a volume typically measured in tens of millilitres. Huh.]
@@ -25,7 +26,7 @@ Let's see what happens.
    - no Javascript
      - I might reluctantly compromise on the no-javascript principle in future, if a particular project or feature depends on it
  - respect visitors[fn::Well, respecting their /privacy/. I don't respect visiting minds in general - refer to the content of this website :)]
-   - no services that might implement tracking are included[fn::Unfortunately this might change - Disqus looks pretty attractve on occassion.]
+   - no services that might implement tracking are included[fn::Unfortunately this might change - Disqus looks pretty attractive on occasion.]
  - openness / freedom (see below)
    - trying to make 'published' the default
    - GPL / CC's licensing
@@ -35,11 +36,11 @@ Let's see what happens.
 This website is generated using [[https://jaspervdj.be/hakyll/][Hakyll]]. Hakyll has provided all I need from a website generation tool - as you can tell by the lack of my tinkering with it. The source of this website is freely available on [[https://github.com/thegaps/bagsend.net][Github]]. If the holes in the networking cheese align, each post will have a working link in the footer to the source document it was produced from[fn::Please take this opportunity to be impressed.].
 
 ** Openness
-How much of this website and all related material is actually public? The posts are obviously publically available, as is the source code for the site. But there is additional material:
+How much of this website and all related material is actually public? The posts are obviously publicly available, as is the source code for the site. But there is additional material:
 - drafts
 - todos and ideas (meta)
 - general website organisation notes and scratchpad (meta)
-I set out to quantify the amount of material in each category. A naive formualation for the openness of this website can be defined:
+I set out to quantify the amount of material in each category. A naive formulation for the openness of this website can be defined:
 #+BEGIN_QUOTE
 $$\%openness = \sum lines_{published}/\sum lines_{unpublished}$$
 #+END_QUOTE
@@ -47,11 +48,11 @@ The intention is that this website will to move towards being 100 % open[fn::I s
 **** Current status
  | Category            | Num lines |
  |---------------------+-----------|
- | Published           |      2588 |
- | Draft (unpublished) |       492 |
- | Meta (unpublished)  |       311 |
- | Total               |      3391 |
- | /% Open/            |   /76.32/ |
+ | Published           |      2736 |
+ | Draft (unpublished) |       494 |
+ | Meta (unpublished)  |       184 |
+ | Total               |      3414 |
+ | /% Open/            |   /80.14/ |
 
 ** Licence
 
@@ -65,3 +66,18 @@ Code hosted on my [[https://github.com/thegaps][Github]] is under the licence in
 Finally, while I may strive for accuracy in the minority of posts, I
 disclaim that anything I say bears anything more than a passing
 resemblance to reality.
+
+** So why "Bagsend"?
+
+A large pocket.
+
+Everyday useful items go in and out. Miscellanea, less useful, accrete. The useful get extra polish from all the movement, the rest dust each other, and exchange a little crud.
+
+A pocket made too large becomes a bag, so here we are. The bag is a holding space for thoughts and their spawn. Maybe some useful things will be born of it; useful idea's go in and out to be built on. Typical success means leaving the bag - a work complete enough to survive in the world on it's own. Remove those, and you are left with small stray thoughts, and errant projects. Stubs of work. Lost time. Idle thoughts.
+
+This could be the 'in progress' projects box. Or the shelf collecting partly-finished wooden figures. I prefer the pocket view. Enter the pocket. Turn out the bag. Brushing it out might be necessary. Now tease the resulting heapy mound into categories, and present them[fn::This choice could also be distantly related to the unavailability of www.baggend...].
+
+/Show the world lint and fluffs, there is beauty in fabric rusts./
+
+** Contact
+I can be contacted via email sent to: [[file:/images/em.png]]

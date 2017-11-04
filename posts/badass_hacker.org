@@ -107,7 +107,7 @@ https://unix.stackexchange.com/questions/133914/set-gnome-terminal-background-te
 
 Well, I made something.
 
-#+BEGIN_SRC bash
+#+BEGIN_SRC bash :tangle trial
 
 #!/bin/bash
 
@@ -210,6 +210,8 @@ done
 
 This script monitors the keyboard input using =xinput test= [5], and writes the type rate to a file, alarmingly called keylog.log. A loop is run which does some bad math and clunky edge-case handling to determine what colours to set in a =gnome-terminal= profile.
 
+Tangled source is available here: [[../projects/littleProjects/code/badass_hacker]].
+
 *** Usage
 
   Don't[4].
@@ -227,3 +229,12 @@ This script monitors the keyboard input using =xinput test= [5], and writes the 
 - Everything
 - Find a way of ensuring there is constant / rapid motion of the terminal window- make it more exciting
 - The dynamics of the process is broken - it slows down after as more keys are pressed
+
+* The inevitable
+(...discovery that nothing is new under the sun)
+
+Courtesy of https://news.ycombinator.com/item?id=15537112:
+- http://www.hackertyper.com/
+- http://geektyper.com/
+- https://atom.io/packages/activate-power-mode
+- https://github.com/codeinthedark/editor

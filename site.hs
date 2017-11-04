@@ -29,7 +29,11 @@ main = hakyll $ do
         route   idRoute
         compile compressCssCompiler
 
-    match (fromList ["about.org", "contact.markdown"]) $ do
+    match "projects/littleProjects/code/**" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match (fromList ["about.org"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -45,26 +49,49 @@ main = hakyll $ do
             >>= loadAndApplyTemplate "templates/footer-with-source.html" postCtx
             >>= relativizeUrls
 
-    create ["archive.html"] $ do
+    -- create ["archive.html"] $ do
+    --     route idRoute
+    --     compile $ do
+    --         posts <- recentFirst =<< loadAll "posts/*"
+    --         let archiveCtx =
+    --                 listField "posts" postCtx (return posts) `mappend`
+    --                 constField "title" "Archives"            `mappend`
+    --                 defaultContext
+
+    --         makeItem ""
+    --             >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+    --             >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+    --             >>= loadAndApplyTemplate "templates/footer.html" postCtx
+    --             >>= relativizeUrls
+
+    match (fromList ["projects/littleProjects/webcam_screen_capture.org"]) $ do
+        route $ setExtension "html"
+        compile $ pandocCompiler
+            -- >>= loadAndApplyTemplate "templates/post.html"    postCtx
+            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= loadAndApplyTemplate "templates/footer.html" defaultContext
+            >>= relativizeUrls
+
+    create ["projects.html"] $ do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let archiveCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Archives"            `mappend`
+            projects <- loadAll "projects/**.org"
+            let projectsCtx =
+                    listField "projects" defaultContext (return projects) `mappend`
+                    constField "title" "Projects"            `mappend`
                     defaultContext
 
             makeItem ""
-                >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/footer.html" postCtx
+                >>= loadAndApplyTemplate "templates/projects.html" projectsCtx
+                >>= loadAndApplyTemplate "templates/default.html" projectsCtx
+                >>= loadAndApplyTemplate "templates/footer.html" defaultContext
                 >>= relativizeUrls
-
 
     match "index.html" $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
+            -- posts <- recentFirst =<< loadAll "projects/*/*"
             let indexCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Home"                `mappend`

@@ -227,6 +227,8 @@ The pre-existing software being:
 - [[https://github.com/gurgeh/selfspy][selfspy]]
 ** Even longer term perspective:
 I know this was useful at least once - it cleared up whether I had done a particular task.
+** Project Location
+The [[../projects/littleProjects/webcam_screen_capture.html][project page]] hosts the latest version of this project.
 
 [1] This is not hypocritical, I consider blogging to be relatively productive (for
 now at least).
@@ -235,3 +237,4 @@ known to man apply to time invested in productivity gains.
 [3] Though that is probably because that is the primary way I waste time on my computer.
 [4] With the exception of a bit of Windows software that popped up on /. some time this past year. IIRC it takes screenshots and possibly captures all text on screen to record in a DB (goes to find a link, can't).
 [5] I noted this process at work when starting [[./org_tree.html][Org Tree]] too.
+
