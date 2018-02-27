@@ -167,6 +167,17 @@ find pid:
 sudo netstat -nlp|grep 8000
 kill:
 kill -1 pid
+** SSL
+Does not seem important, as no personal info get's bandied around.
+If carriers injecting random scripts etc into pages becomes super common, then this would be worthwhile.
+resources:
+- https://www.davidbaumgold.com/tutorials/host-static-site-aws-s3-cloudfront/
+- https://olivermak.es/2016/01/aws-tls-certificate-with-jekyll/
+- https://letsencrypt.org/
+- https://osostudio.com/blog/how-to-encrypt-your-website-in-15-minutes/
+- https://medium.com/@willmorgan/moving-a-static-website-to-aws-s3-cloudfront-with-https-1fdd95563106
+- https://knightlab.northwestern.edu/2015/05/21/implementing-ssl-on-amazon-s3-static-websites/
+
 ** Standards
 *** footnotes
 [fn::actually, not actually]
@@ -587,4 +598,8 @@ Added to 'calibrate'
 ** TODO Collect some more website examples
    :PROPERTIES:
    :CREATED:  [2017-11-04 Sat 16:13:32]
+   :END:
+** TODO Tree sitemap
+   :PROPERTIES:
+   :CREATED:  [2017-12-24 Sun 22:51:25]
    :END:
