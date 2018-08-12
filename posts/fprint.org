@@ -1,0 +1,128 @@
+---
+title: fprint... f?
+created: 2018-08-11
+published: 2018-08-12
+status: in progress
+---
+Hardware in sight, hardware in mind; There's a piece of disused hardware on my desk - I'll see it most days, and acknowledge it fully somewhat less than that. It's on my desk, because it's friggen built into it - a finger-print scanner in a laptop. For reasons unknown, I've always dismissed using it for it's intended purpose, but I'm convinced it could do something kind of cool, if I just bothered to poke around a bit.
+
+Taking images of small things seems like a possibility. As I don't have a microscope and the cameras I do have available are positively incapable of focusing at anything on or near their nose, I have no other means of doing this. This might be a point where the general solution is to buy equipment to handle the task, but the basic solution of getting more hardware to solve a problem that /might/ be tackled by being just a little smarter, is one of those chestnuts that often motivates me to try something[fn::Call it "hardware upcycling"... (sorry)].
+
+So can I get pretty snaps of little things? Can it do anything else? Can I control the LED's? Is there a secret "enable laser, re-configure fingerprints" mode?
+* Origin
+ This is not a 'Prior Work' section, but I feel completely obliged to make some effort into a bit of background, as [[http://togelius.blogspot.com/2016/04/the-differences-between-tinkering-and.html][this post]] (I think fairly) calls out bloggers who casually experiment / poke around some idea, for completely failing to acknowledge prior work. I'm definitely in the tinkerer category, and not a good example of one at that. While being completely OK with this site being "random bits of cruft", I feel guilty for not including some attempt at a 'prior work' feature. 
+
+I sense a couple of reasons why I wouldn't naturally include a prior work section:
+ 1) It's boring.
+    - Searching is generally boring. Toying with stuff is not. This site is a record of toying with stuff.
+    - My interest in a topic generally only goes as deep as touching it once - running one demo, and then leaving it alone.
+    - Too impatient to learn everything along the way
+ 2) My writing and tinkering is average. Possibly less than average. It seems /unnatural/ [fn::And 'unnatural' is not a weak feeling] to present a page with a broad landscape of beautiful great works, and then squeeze your own efforts into a dirty little thumbnail alongside it.
+    - the ratio of summarising:doing becomes too high
+
+Anyway,
+
+I had a bit of a research potter. This kind of tomfoolery seems like the kind of thing that would make it onto Hackaday, but there does not appear to be anything relevant there. The nearby search-gravity-wells seemed to be:
+1) reconstructing fingerprints from (normal) photograph
+2) using a mobile fingerprint scanner as a shutter button, for taking a picture (no screen unlock required)
+
+No dice. Though going through this exercise did help me clarify what my intent was; something along the lines of "Fingerprint reader as a microscope".
+ 
+* What drives what?
+=fprint= is the final word on Linux support for fingerprint scanning devices. A neat demo of the fprint library is =fprint_demo=, which features one alluring tab "Image capture", which simply states "Not implemented yet."[fn::I strongly suspect the user-base isn't there anymore to bother]. Perhaps I could add this functionality? After mashing through unfamiliar build territory, I got the source to compile and run. Impatient hacking at unfamiliar code, in a language I rarely look at, with tools and libraries I don't use, had the predictable result of not returning fruit before the impatience meter ran out.
+
+However, it did show a bit of the interface to the underlying =fprint= library, which was handling the hardware. So the focus shifts there.
+* fingerprint
+By comparison, I had an easy time getting =fprint= to compile on my machine. Starting from standard Ubuntu 18.04, the following sequence of yanking levers did the trick:
+#+BEGIN_SRC bash
+git clone https://gitlab.freedesktop.org/libfprint/libfprint
+cd libfprint
+sudo apt install ninja-build libnss3-dev
+pip3 install --user meson
+#+END_SRC
+At this point I edited =meson_options.txt= to set X11 examples to =false=, because I didn't know where to get =xv=.
+#+BEGIN_SRC bash
+mkdir build
+meson build && cd build
+ninja
+$$$$
+#+END_SRC
+Note the =$$$$= at the end. Common knowledge says this is shorthand for "profit". The interpretation of "many responsive shells" (meaning something worked, or at least didn't completely bork a system) makes more sense to me[fn::The use of =$= instead of =#= makes it more personal, though in power-hungry circles =####= might be preferred.].
+
+Super-helpfully, the is a provided example =img_capture= fits my needs. Ability gained:
+#+BEGIN_COMMENT
+#+BEGIN_SRC dot :file ../images/fprint/tool.png :cmdline -Kdot -Tpng
+  digraph {
+  rankdir=LR;
+  node [shape=box];
+  "command" -> "scan" -> "image"
+  }
+#+END_SRC
+#+END_COMMENT
+[[file:../images/fprint/tool.png]]
+** Hardware control
+Now it was easy to take images... of fingerprints. But that's not interesting! There's got to be more to this. Peeking into =img_capture.c=:
+#+BEGIN_SRC c
+  printf("Opened device. It's now time to scan your finger.\n\n");
+
+  r = fp_dev_img_capture(dev, 0, &img);
+#+END_SRC
+This call to =fp_dev_img_capture= is where all the action happens. The [[http://www.reactivated.net/fprint/api/group__dev.html#ga7a7f70b12f0276df4749d23caf2cecd][docs]] suggest that setting the unconditional flag (the second arg) will give whats desired - the ability to scan anything.
+
+In practice this didn't work out so nicely, setting the flag seemed to be a reliable way to cause the program to crash. At this point the reality seemed more like:
+#+BEGIN_COMMENT
+#+BEGIN_SRC dot :file ../images/fprint/tool_trouble.png :cmdline -Kdot -Tpng
+  digraph {
+  rankdir=LR;
+  node [shape=box];
+  "command" -> "fp_dev_img_capture" -> "stuff I don't know about" -> "stuff I can't control"-> "image (fingerprints only)"
+  }
+#+END_SRC
+#+END_COMMENT
+[[../images/fprint/tool_trouble.png]]
+
+The only easy path left remaining was to see what would get past the filter for what is a fingerprint.
+
+Quick quiz; What's this?
+ [[../images/fprint/mint10.png]]
+** What doesn't look like fingers?
+ - dead leaf
+ - lemony herb thing
+ - succulent
+   - surprised by this one - it looked promising to the eye
+   - perhaps the apparent texture is based on pigment, not a physical texture on the top-surface
+ - backs of fingers
+   - might have gotten this once
+ - chin
+   - <50 % success rate
+ - mink
+ - dark leather
+   - a little surprised by this one
+ - cotton
+ - paper (text)
+ - felt
+** What can look like fingers?
+ - mint leaves!
+   - top down, long axis seems to work most reliably
+ - palms
+ - sides of fingers
+ - nose
+   - first try!
+   - wow, this looks kind of repeatable...
+ - toes, not surprising
+ - heel
+ - gibbon fingers
+   - OK, didn't actually get to try this one
+ - wet wipe (well, it didn't actually work, but that had to come last)
+
+ Digging the results for the mint. The above image, and the following are all from the same leaf.
+ [[../images/fprint/mint11.png]] [[../images/fprint/mint6.png]]
+
+#+BEGIN_COMMENT
+* LED control
+Did not attempt.
+#+END_COMMENT
+
+Calling this success; =$$$$= achieved.
+ 
+May you have many responsive shells.
