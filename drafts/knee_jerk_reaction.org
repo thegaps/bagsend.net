@@ -1,8 +1,8 @@
 ---
 title: 
-published: [2017-06-15 Thu]
+published: 2017-06-15
 status: in progress
-modified: [2017-06-15 Thu]
+modified: 2017-06-15
 ---
 *  Calibrated test equipment.
 It's a phone.

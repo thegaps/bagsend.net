@@ -486,10 +486,12 @@ It's weird though right?
    :END:
 That way I can have my own comments and background mish mash on a post
 Canned: Comments are good enough. This is against the idea of openness, /and/ is more complex.
-** TODO Noob post. What is this hakyll thing?
+** CANNED Noob post. What is this hakyll thing?
    :PROPERTIES:
    :CREATED:  [2017-02-03 Fri 07:21:15]
    :END:
+   - State "CANNED"     from "OPT"        [2018-04-02 Mon 12:26] \\
+     not interested
 ** TODO show basic usage on github 
    :PROPERTIES:
    :CREATED:  [2016-12-17 Sat 00:52:41]
@@ -602,4 +604,8 @@ Added to 'calibrate'
 ** TODO Tree sitemap
    :PROPERTIES:
    :CREATED:  [2017-12-24 Sun 22:51:25]
+   :END:
+** TODO RSS
+   :PROPERTIES:
+   :CREATED:  [2018-04-02 Mon 12:31:01]
    :END:

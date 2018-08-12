@@ -1,8 +1,8 @@
 ---
 title: 
-published: [2017-06-14 Wed]
+published: 2017-06-14
 status: in progress
-modified: [2017-06-14 Wed]
+modified: 2017-06-14
 ---
 There is a lamp on my bedstand. It has a spherical shade. You can ping the shade with a fingernail, and hear it ring quite clearly. What tone(s) is it making?
 * The not-googling-yet guess

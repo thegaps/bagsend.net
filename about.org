@@ -15,7 +15,7 @@ following essential summary:
 *This website is my playground and vanity page.[fn::Well, let that be the party line at least. I do suspect that this site primarily exists to provide a place for the completely intoxicating practice of writing footnotes.]*
 
 I anticipate this website will contain both long (gradually expanded and
-refined) and short (one-off cruft) content.
+refined) and short (one-off cruft) content[fn::It appears the real battle for dominant content type is between incomplete one-off cruft and one-off cruft].
 
 Let's see what happens.
 
