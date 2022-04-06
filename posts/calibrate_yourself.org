@@ -2,8 +2,8 @@
 title: Calibrate Yourself
 published: 2016-10-26
 created: 2016-10-26
-modified: 2017-02-18
-status: in progress
+modified: 2022-04-06
+status: exists
 ---
 
 # Making measurements without equipment
@@ -90,6 +90,12 @@ This wields just like a small superpower. What other powers of measurement sans 
 
 * Some days after ...
 [[../images/calibrate yourself/calibrated_hitchhiker.gif]]
+
+* Update - Military Estimation 
+
+'Military Estimation' is the field that covers much of what I'm grasping for in this post.
+[[https://commons.wikimedia.org/wiki/Special:Redirect/file/Mil_estimation.jpg]]
+
 
 [1] We were flying at a low altitude for longer than I was used to - this was my first time flying in a Convair CV-580.
 [2] I would expect to be within $\pm 40 \%$ in this range.
